@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace BlockDiagramEditor.Models
+{
+    public class DiamondBlock : Block
+    {
+        public DiamondBlock() : base() { }
+
+        public DiamondBlock(int x, int y) : base(x, y) { }
+
+        public override void Draw(PaintEventArgs e)
+        {
+            GraphicsPath path = new GraphicsPath();
+            Point[] points =
+            {
+                new Point(X + Width / 2, Y),
+                new Point(X + Width, Y + Height / 2),
+                new Point(X + Width / 2, Y + Height),
+                new Point(X, Y + Height / 2)
+            };
+            path.AddLines(points);
+            path.CloseFigure();
+            e.Graphics.DrawPath(Pens.Black, path);
+        }
+
+        public override bool Contains(int x, int y)
+        {
+            return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
+        }
+    }
+}
