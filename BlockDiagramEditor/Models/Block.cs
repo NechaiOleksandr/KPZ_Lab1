@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +14,11 @@ namespace BlockDiagramEditor.Models
         public int Y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-
-        public Block()
-        {
-            X = 0;
-            Y = 0;
-            Width = 0;
-            Height = 0;
-        }
+        public string Text { get; set; }
+        public Font Font { get; set; }
+        public Rectangle TextArea { get; set; }
+        public Color ForeColor { get; set; }
+        public Color BackColor { get; set; }
 
         public Block(int x, int y)
         {
@@ -28,9 +26,20 @@ namespace BlockDiagramEditor.Models
             Y = y;
             Width = 160;
             Height = 80;
+            Text = string.Empty;
+            Font = new Font("consolas", 12);
         }
 
-        public abstract void Draw(PaintEventArgs e);
+        public virtual void Draw(PaintEventArgs e)
+        {
+            TextArea = new Rectangle(X + 5, Y + 5, Width - 10, Height - 10);
+            StringFormat Format = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            e.Graphics.DrawString(Text, Font, Brushes.Black, TextArea, Format);
+        }
         public abstract bool Contains(int x, int y);
     }
 }

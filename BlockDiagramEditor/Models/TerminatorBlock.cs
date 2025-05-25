@@ -11,8 +11,6 @@ namespace BlockDiagramEditor.Models
 {
     public class TerminatorBlock : Block
     {
-        public TerminatorBlock() : base() { }
-
         public TerminatorBlock(int x, int y) : base(x, y) { }
 
         public override void Draw(PaintEventArgs e)
@@ -22,7 +20,9 @@ namespace BlockDiagramEditor.Models
             path.AddArc(X + Width - Height, Y, Height, Height, 270, 180);
             path.CloseFigure();
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.FillPath(Brushes.White, path);
             e.Graphics.DrawPath(Pens.Black, path);
+            base.Draw(e);
         }
 
         public override bool Contains(int x, int y)

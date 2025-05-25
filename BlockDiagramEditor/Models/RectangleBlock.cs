@@ -12,14 +12,13 @@ namespace BlockDiagramEditor.Models
 {
     public class RectangleBlock : Block
     {
-
-        public RectangleBlock() : base() { }
-
         public RectangleBlock(int x, int y) : base(x, y) { }
 
         public override void Draw(PaintEventArgs e)
         {
+            e.Graphics.FillRectangle(Brushes.White, X, Y, Width, Height);
             e.Graphics.DrawRectangle(Pens.Black, X, Y, Width, Height);
+            base.Draw(e);
         }
 
         public override bool Contains(int x, int y)
