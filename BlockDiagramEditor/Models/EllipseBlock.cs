@@ -16,7 +16,7 @@ namespace BlockDiagramEditor.Models
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.FillEllipse(Brushes.White, X, Y, Width, Height);
-            e.Graphics.DrawEllipse(Pens.Black, X, Y, Width, Height);
+            e.Graphics.DrawEllipse(IsSelected ? new Pen(Color.Black, 5) : Border, X, Y, Width, Height);
             base.Draw(e);
         }
 

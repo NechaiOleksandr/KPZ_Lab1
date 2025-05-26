@@ -17,8 +17,9 @@ namespace BlockDiagramEditor.Models
         public string Text { get; set; }
         public Font Font { get; set; }
         public Rectangle TextArea { get; set; }
-        public Color ForeColor { get; set; }
-        public Color BackColor { get; set; }
+        public Pen Border {  get; set; }
+        public Brush Brush { get; set; }
+        public bool IsSelected { get; set; }
 
         public Block(int x, int y)
         {
@@ -28,6 +29,8 @@ namespace BlockDiagramEditor.Models
             Height = 80;
             Text = string.Empty;
             Font = new Font("consolas", 12);
+            Border = new Pen(Color.Black, 1);
+            IsSelected = false;
         }
 
         public virtual void Draw(PaintEventArgs e)

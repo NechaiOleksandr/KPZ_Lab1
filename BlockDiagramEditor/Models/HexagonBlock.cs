@@ -28,7 +28,7 @@ namespace BlockDiagramEditor.Models
             path.AddLines(points);
             path.CloseFigure();
             e.Graphics.FillPath(Brushes.White, path);
-            e.Graphics.DrawPath(Pens.Black, path);
+            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5) : Border, path);
             base.Draw(e);
         }
 

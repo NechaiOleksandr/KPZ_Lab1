@@ -34,7 +34,9 @@
             this.btnSelectTerminator = new System.Windows.Forms.Button();
             this.btnSelectRectangle = new System.Windows.Forms.Button();
             this.btnSelectEllipse = new System.Windows.Forms.Button();
+            this.btnDeleteBlock = new System.Windows.Forms.Button();
             this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSelectHexagon
@@ -133,6 +135,22 @@
             this.btnSelectEllipse.UseVisualStyleBackColor = false;
             this.btnSelectEllipse.Click += new System.EventHandler(this.btnSelectEllipse_Click);
             // 
+            // btnDeleteBlock
+            // 
+            this.btnDeleteBlock.BackColor = System.Drawing.Color.White;
+            this.btnDeleteBlock.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnDeleteBlock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnDeleteBlock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnDeleteBlock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteBlock.Location = new System.Drawing.Point(12, 493);
+            this.btnDeleteBlock.Name = "btnDeleteBlock";
+            this.btnDeleteBlock.Size = new System.Drawing.Size(133, 48);
+            this.btnDeleteBlock.TabIndex = 6;
+            this.btnDeleteBlock.TabStop = false;
+            this.btnDeleteBlock.Text = "Видалити блок";
+            this.btnDeleteBlock.UseVisualStyleBackColor = false;
+            this.btnDeleteBlock.Click += new System.EventHandler(this.btnDeleteBlock_Click);
+            // 
             // panelCanvas
             // 
             this.panelCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -149,12 +167,23 @@
             this.panelCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseMove);
             this.panelCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseUp);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(45, 417);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(782, 553);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnDeleteBlock);
             this.Controls.Add(this.btnSelectHexagon);
             this.Controls.Add(this.panelCanvas);
             this.Controls.Add(this.btnSelectDiamond);
@@ -165,6 +194,7 @@
             this.Name = "Form1";
             this.Text = "Block Diagram Editor";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -177,6 +207,8 @@
         private System.Windows.Forms.Button btnSelectHexagon;
         private System.Windows.Forms.Button btnSelectDiamond;
         private System.Windows.Forms.Button btnSelectParalelogram;
+        private System.Windows.Forms.Button btnDeleteBlock;
+        private System.Windows.Forms.Label label1;
     }
 }
 

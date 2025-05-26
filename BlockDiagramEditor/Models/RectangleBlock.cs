@@ -17,7 +17,7 @@ namespace BlockDiagramEditor.Models
         public override void Draw(PaintEventArgs e)
         {
             e.Graphics.FillRectangle(Brushes.White, X, Y, Width, Height);
-            e.Graphics.DrawRectangle(Pens.Black, X, Y, Width, Height);
+            e.Graphics.DrawRectangle(IsSelected ? new Pen(Color.Black, 5) : Border, X, Y, Width, Height);
             base.Draw(e);
         }
 

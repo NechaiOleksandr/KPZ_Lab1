@@ -21,7 +21,7 @@ namespace BlockDiagramEditor.Models
             path.CloseFigure();
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.FillPath(Brushes.White, path);
-            e.Graphics.DrawPath(Pens.Black, path);
+            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5) : Border, path);
             base.Draw(e);
         }
 
