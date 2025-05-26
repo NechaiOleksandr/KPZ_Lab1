@@ -7,21 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BlockDiagramEditor.Services;
 
 namespace BlockDiagramEditor.Models
 {
     public class RectangleBlock : Block
     {
-        public RectangleBlock(int x, int y) : base(x, y) { }
+        public RectangleBlock(float x, float y) : base(x, y) { }
 
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(PaintEventArgs e, float scale, PointF offset)
         {
-            e.Graphics.FillRectangle(Brushes.White, X, Y, Width, Height);
-            e.Graphics.DrawRectangle(IsSelected ? new Pen(Color.Black, 5) : Border, X, Y, Width, Height);
-            base.Draw(e);
+            float sx = X * scale + offset.X;
+            float sy = Y * scale + offset.Y;
+            float sw = Width * scale;
+            float sh = Height * scale;
+
+            e.Graphics.FillRectangle(Brushes.White,sx, sy, sw, sh);
+            e.Graphics.DrawRectangle(IsSelected ? new Pen(Color.Black, 5 * scale) : new Pen(Border.Color, Border.Width * scale), sx, sy, sw, sh);
+            base.Draw(e, scale, offset);
         }
 
-        public override bool Contains(int x, int y)
+        public override bool Contains(float x, float y)
         {
             return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
         }

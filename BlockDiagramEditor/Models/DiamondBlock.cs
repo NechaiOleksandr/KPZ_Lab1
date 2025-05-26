@@ -11,26 +11,31 @@ namespace BlockDiagramEditor.Models
 {
     public class DiamondBlock : Block
     {
-        public DiamondBlock(int x, int y) : base(x, y) { }
+        public DiamondBlock(float x, float y) : base(x, y) { }
 
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(PaintEventArgs e, float scale, PointF offset)
         {
+            float sx = X * scale + offset.X;
+            float sy = Y * scale + offset.Y;
+            float sw = Width * scale;
+            float sh = Height * scale;
+
             GraphicsPath path = new GraphicsPath();
-            Point[] points =
+            PointF[] points =
             {
-                new Point(X + Width / 2, Y),
-                new Point(X + Width, Y + Height / 2),
-                new Point(X + Width / 2, Y + Height),
-                new Point(X, Y + Height / 2)
+                new PointF(sx + sw / 2, sy),
+                new PointF(sx + sw, sy + sh / 2),
+                new PointF(sx + sw / 2, sy + sh),
+                new PointF(sx, sy + sh / 2)
             };
             path.AddLines(points);
             path.CloseFigure();
             e.Graphics.FillPath(Brushes.White, path);
-            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5) : Border, path);
-            base.Draw(e);
+            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5 * scale) : new Pen(Border.Color, Border.Width * scale), path);
+            base.Draw(e, scale, offset);
         }
 
-        public override bool Contains(int x, int y)
+        public override bool Contains(float x, float y)
         {
             return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
         }

@@ -36,7 +36,8 @@
             this.btnSelectEllipse = new System.Windows.Forms.Button();
             this.btnDeleteBlock = new System.Windows.Forms.Button();
             this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelScale = new System.Windows.Forms.Label();
+            this.panelCanvas.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSelectHexagon
@@ -157,6 +158,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCanvas.BackColor = System.Drawing.Color.Silver;
+            this.panelCanvas.Controls.Add(this.labelScale);
             this.panelCanvas.Location = new System.Drawing.Point(151, 12);
             this.panelCanvas.Name = "panelCanvas";
             this.panelCanvas.Size = new System.Drawing.Size(619, 529);
@@ -167,14 +169,15 @@
             this.panelCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseMove);
             this.panelCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseUp);
             // 
-            // label1
+            // labelScale
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 417);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
+            this.labelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelScale.AutoSize = true;
+            this.labelScale.Location = new System.Drawing.Point(3, 510);
+            this.labelScale.Name = "labelScale";
+            this.labelScale.Size = new System.Drawing.Size(104, 16);
+            this.labelScale.TabIndex = 0;
+            this.labelScale.Text = "Масштаб: 100%";
             // 
             // Form1
             // 
@@ -182,7 +185,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(782, 553);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDeleteBlock);
             this.Controls.Add(this.btnSelectHexagon);
             this.Controls.Add(this.panelCanvas);
@@ -193,8 +195,9 @@
             this.Controls.Add(this.btnSelectRectangle);
             this.Name = "Form1";
             this.Text = "Block Diagram Editor";
+            this.panelCanvas.ResumeLayout(false);
+            this.panelCanvas.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -208,7 +211,7 @@
         private System.Windows.Forms.Button btnSelectDiamond;
         private System.Windows.Forms.Button btnSelectParalelogram;
         private System.Windows.Forms.Button btnDeleteBlock;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelScale;
     }
 }
 

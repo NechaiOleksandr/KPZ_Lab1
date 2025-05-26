@@ -11,26 +11,31 @@ namespace BlockDiagramEditor.Models
 {
     public class ParalelogramBlock : Block
     {
-        public ParalelogramBlock(int x, int y) : base(x, y) { }
+        public ParalelogramBlock(float x, float y) : base(x, y) { }
 
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(PaintEventArgs e, float scale, PointF offset)
         {
+            float sx = X * scale + offset.X;
+            float sy = Y * scale + offset.Y;
+            float sw = Width * scale;
+            float sh = Height * scale;
+
             GraphicsPath path = new GraphicsPath();
-            Point[] points =
+            PointF[] points =
             {
-                new Point(X, Y + Height),
-                new Point(X + Width / 8, Y),
-                new Point(X + Width, Y),
-                new Point(X + Width - Width / 8, Y + Height)
+                new PointF(sx, sy + sh),
+                new PointF(sx + sw / 8, sy),
+                new PointF(sx + sw, sy),
+                new PointF(sx + sw - sw / 8, sy + sh)
             };
             path.AddLines(points);
             path.CloseFigure();
             e.Graphics.FillPath(Brushes.White, path);
-            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5) : Border, path);
-            base.Draw(e);
+            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5 * scale) : new Pen(Border.Color, Border.Width * scale), path);
+            base.Draw(e, scale, offset);
         }
 
-        public override bool Contains(int x, int y)
+        public override bool Contains(float x, float y)
         {
             return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
         }
