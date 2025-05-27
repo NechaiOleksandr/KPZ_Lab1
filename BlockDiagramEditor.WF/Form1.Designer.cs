@@ -35,6 +35,7 @@
             this.btnSelectRectangle = new System.Windows.Forms.Button();
             this.btnSelectEllipse = new System.Windows.Forms.Button();
             this.btnDeleteBlock = new System.Windows.Forms.Button();
+            this.showCenter = new System.Windows.Forms.CheckBox();
             this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
             this.labelScale = new System.Windows.Forms.Label();
             this.panelCanvas.SuspendLayout();
@@ -152,6 +153,19 @@
             this.btnDeleteBlock.UseVisualStyleBackColor = false;
             this.btnDeleteBlock.Click += new System.EventHandler(this.btnDeleteBlock_Click);
             // 
+            // showCenter
+            // 
+            this.showCenter.AutoSize = true;
+            this.showCenter.Checked = true;
+            this.showCenter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showCenter.Location = new System.Drawing.Point(12, 467);
+            this.showCenter.Name = "showCenter";
+            this.showCenter.Size = new System.Drawing.Size(135, 20);
+            this.showCenter.TabIndex = 7;
+            this.showCenter.Text = "Показати центр";
+            this.showCenter.UseVisualStyleBackColor = true;
+            this.showCenter.CheckedChanged += new System.EventHandler(this.showCenter_CheckedChanged);
+            // 
             // panelCanvas
             // 
             this.panelCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -161,7 +175,7 @@
             this.panelCanvas.Controls.Add(this.labelScale);
             this.panelCanvas.Location = new System.Drawing.Point(151, 12);
             this.panelCanvas.Name = "panelCanvas";
-            this.panelCanvas.Size = new System.Drawing.Size(619, 529);
+            this.panelCanvas.Size = new System.Drawing.Size(751, 529);
             this.panelCanvas.TabIndex = 2;
             this.panelCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCanvas_Paint);
             this.panelCanvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDoubleClick);
@@ -184,7 +198,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(782, 553);
+            this.ClientSize = new System.Drawing.Size(914, 553);
+            this.Controls.Add(this.showCenter);
             this.Controls.Add(this.btnDeleteBlock);
             this.Controls.Add(this.btnSelectHexagon);
             this.Controls.Add(this.panelCanvas);
@@ -195,9 +210,13 @@
             this.Controls.Add(this.btnSelectRectangle);
             this.Name = "Form1";
             this.Text = "Block Diagram Editor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panelCanvas.ResumeLayout(false);
             this.panelCanvas.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -212,6 +231,7 @@
         private System.Windows.Forms.Button btnSelectParalelogram;
         private System.Windows.Forms.Button btnDeleteBlock;
         private System.Windows.Forms.Label labelScale;
+        private System.Windows.Forms.CheckBox showCenter;
     }
 }
 

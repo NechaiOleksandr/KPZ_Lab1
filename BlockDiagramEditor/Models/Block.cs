@@ -34,16 +34,17 @@ namespace BlockDiagramEditor.Models
             IsSelected = false;
         }
 
-        public virtual void Draw(PaintEventArgs e, float scale, PointF offset)
+        public virtual void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {
+
             PointF location = new PointF(X, Y);
-            TextArea = new RectangleF((X + 5) * scale + offset.X, (Y + 5) * scale + offset.Y, (Width - 10) * scale, (Height - 10) * scale);
+            TextArea = new RectangleF(tr.CTSX(X + 5), tr.CTSY(Y + 5), tr.CTSS(Width - 10), tr.CTSS(Height - 10));
             StringFormat Format = new StringFormat
             {
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            e.Graphics.DrawString(Text, new Font(Font.FontFamily, Font.Size * scale), Brushes.Black, TextArea, Format);
+            e.Graphics.DrawString(Text, new Font(Font.FontFamily, tr.CTSS(Font.Size)), Brushes.Black, TextArea, Format);
         }
 
         public abstract bool Contains(float x, float y);

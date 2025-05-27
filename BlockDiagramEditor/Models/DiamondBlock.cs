@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BlockDiagramEditor.Services;
 
 namespace BlockDiagramEditor.Models
 {
@@ -13,12 +14,12 @@ namespace BlockDiagramEditor.Models
     {
         public DiamondBlock(float x, float y) : base(x, y) { }
 
-        public override void Draw(PaintEventArgs e, float scale, PointF offset)
+        public override void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {
-            float sx = X * scale + offset.X;
-            float sy = Y * scale + offset.Y;
-            float sw = Width * scale;
-            float sh = Height * scale;
+            float sx = tr.CTSX(X);
+            float sy = tr.CTSY(Y);
+            float sw = tr.CTSS(Width);
+            float sh = tr.CTSS(Height);
 
             GraphicsPath path = new GraphicsPath();
             PointF[] points =
@@ -31,8 +32,8 @@ namespace BlockDiagramEditor.Models
             path.AddLines(points);
             path.CloseFigure();
             e.Graphics.FillPath(Brushes.White, path);
-            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, 5 * scale) : new Pen(Border.Color, Border.Width * scale), path);
-            base.Draw(e, scale, offset);
+            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, tr.CTSS(5)) : new Pen(Border.Color, tr.CTSS(Border.Width)), path);
+            base.Draw(e, tr);
         }
 
         public override bool Contains(float x, float y)

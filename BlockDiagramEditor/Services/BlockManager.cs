@@ -17,27 +17,32 @@ namespace BlockDiagramEditor.Services
         public Block LastSelectedBlock { get; set; }
         public Block EditingBlock { get; set; }
         public TextBox EditText { get; set; }
-        public float Scale { get; set; } = 1;
-        public PointF CanvasOffset { get; set; } = new PointF(0, 0);
+        public CoordinateTransformer Tr { get; set; }
+        public BlockManager(CoordinateTransformer transformer)
+        {
+            Tr = transformer;
+        }
 
         public void SelectBlock(int x, int y)
         {
-            if (LastSelectedBlock != null && !LastSelectedBlock.Contains((x - CanvasOffset.X) / Scale, (y - CanvasOffset.Y) / Scale))
+            if (LastSelectedBlock != null && !LastSelectedBlock.Contains(Tr.STCX(x), Tr.STCY(y)))
             {
                 LastSelectedBlock.IsSelected = false;
             }
-            SelectedBlock = Blocks.LastOrDefault(block => block.Contains((x - CanvasOffset.X) / Scale, (y - CanvasOffset.Y) / Scale));
+            SelectedBlock = Blocks.LastOrDefault(block => block.Contains(Tr.STCX(x), Tr.STCY(y)));
             if (SelectedBlock != null)
             {
                 SelectedBlock.IsSelected = true;
                 LastSelectedBlock = SelectedBlock;
+                Blocks.Remove(SelectedBlock);
+                Blocks.Add(SelectedBlock);
             }
         }
 
         public void AddBlock(int model, int x, int y)
         {
-            float X = ((x - CanvasOffset.X) / Scale - 80) - ((x - CanvasOffset.X) / Scale - 80) % 10;
-            float Y = ((y - CanvasOffset.Y) / Scale - 40) - ((y - CanvasOffset.Y) / Scale - 40) % 10;
+            float X = (Tr.STCX(x) - 80) - (Tr.STCX(x) - 80) % 10;
+            float Y = (Tr.STCY(y) - 40) - (Tr.STCY(y) - 40) % 10;
             Block newBlock = null;
             switch (model)
             {
@@ -77,16 +82,16 @@ namespace BlockDiagramEditor.Services
 
         public void StartEditingText(Control canvas, float x, float y)
         {
-            EditingBlock = Blocks.LastOrDefault(block => block.Contains(x - CanvasOffset.X, y - CanvasOffset.Y));
+            EditingBlock = Blocks.LastOrDefault(block => block.Contains(x - Tr.CanvasOffset.X, y - Tr.CanvasOffset.Y));
             if (EditingBlock != null)
             {
                 EditText = new TextBox()
                 {
-                    Location = new Point((int)((EditingBlock.X + 5) * Scale + CanvasOffset.X), (int)((EditingBlock.Y + 5) * Scale + CanvasOffset.Y)),
-                    Size = new Size((int)((EditingBlock.Width - 10) * Scale), (int)((EditingBlock.Height - 10) * Scale)),
+                    Location = new Point((int)Tr.CTSX(EditingBlock.X + 5), (int)Tr.CTSY(EditingBlock.Y + 5)),
+                    Size = new Size((int)Tr.CTSS(EditingBlock.Width - 10), (int)Tr.CTSS(EditingBlock.Height - 10)),
                     Text = EditingBlock.Text,
                     Multiline = true,
-                    Font = new Font(EditingBlock.Font.FontFamily, EditingBlock.Font.Size * Scale),
+                    Font = new Font(EditingBlock.Font.FontFamily, Tr.CTSS(EditingBlock.Font.Size)),
                     TextAlign = HorizontalAlignment.Center,
                     BorderStyle = BorderStyle.None,
                 };
@@ -106,36 +111,5 @@ namespace BlockDiagramEditor.Services
                 EditText = null;
             }
         }
-
-        public void ChangeScale(int delta)
-        {
-            if (delta < 0 && Scale > 0.11)
-            {
-                Scale -= 0.1F;
-                Scale = (float)Math.Round(Scale, 1);
-            }
-            else if (delta > 0 && Scale < 2.5)
-            {
-                Scale += 0.1F;
-                Scale = (float)Math.Round(Scale, 1);
-            }
-        }
-        
-        //public PointF ToScreen(PointF logical)
-        //{
-        //    return new PointF(logical.X * Scale + CanvasOffset.X, logical.Y * Scale + CanvasOffset.Y);
-        //}
-        //public SizeF ToScreen(SizeF logicalSize)
-        //{
-        //    return new SizeF(logicalSize.Width * Scale, logicalSize.Height * Scale);
-        //}
-        //public PointF ToLogical(PointF screen)
-        //{
-        //    return new PointF((screen.X - CanvasOffset.X) / Scale, (screen.Y - CanvasOffset.Y) / Scale);
-        //}
-        //public SizeF ToLogical(SizeF screenSize)
-        //{
-        //    return new SizeF(screenSize.Width / Scale, screenSize.Height / Scale);
-        //}
     }
 }
