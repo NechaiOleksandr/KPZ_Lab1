@@ -52,6 +52,7 @@
     <Compile Include="Models\HexagonBlock.cs" />
     <Compile Include="Models\ParalelogramBlock.cs" />
     <Compile Include="Models\RectangleBlock.cs" />
+    <Compile Include="Models\ResizeHandle.cs" />
     <Compile Include="Models\TerminatorBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlockManager.cs" />

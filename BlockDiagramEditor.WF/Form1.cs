@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
+using BlockDiagramEditor.Models;
 using BlockDiagramEditor.Services;
 
 namespace BlockDiagramEditor.WF
@@ -18,10 +19,11 @@ namespace BlockDiagramEditor.WF
         {
             DashStyle = DashStyle.Custom,
             DashPattern = new float[] { 5, 3 }
-        }
-        ;
+        };
         private CoordinateTransformer tr = new CoordinateTransformer();
         private BlockManager BlockManager;
+        private ResizeHandle currentResizeHandle = ResizeHandle.None;
+        private bool isResizing = false;
 
         public Form1()
         {
@@ -39,6 +41,8 @@ namespace BlockDiagramEditor.WF
         {
             tr.ChangeScale(e.Delta);
             labelScale.Text = $"Масштаб: {tr.Scale * 100}%";
+            centerLine.DashPattern[0] = tr.CTSS(centerLine.DashPattern[0]);
+            centerLine.DashPattern[1] = tr.CTSS(centerLine.DashPattern[1]);
             BlockManager.EndEditingText(panelCanvas);
             panelCanvas.Invalidate();
         }   
@@ -55,6 +59,23 @@ namespace BlockDiagramEditor.WF
 
         private void panelCanvas_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+            {
+                isPanning = true;
+                lastMousePosition = e.Location;
+                Cursor = Cursors.SizeAll;
+            }
+
+            if (BlockManager.SelectedBlock != null && e.Button == MouseButtons.Left)
+            {
+                currentResizeHandle = BlockManager.SelectedBlock.GetResizeHandleAt(e.Location, tr);
+                if (currentResizeHandle != ResizeHandle.None)
+                {
+                    isResizing = true;
+                    return;
+                }
+            }
+
             if (e.Button == MouseButtons.Left && selectedModel == 0)
             {
                 BlockManager.SelectBlock(e.X, e.Y);
@@ -72,13 +93,6 @@ namespace BlockDiagramEditor.WF
                 dragOffset = new PointF(e.X / tr.Scale - BlockManager.SelectedBlock.X, e.Y / tr.Scale - BlockManager.SelectedBlock.Y);
             }
 
-            if (BlockManager.SelectedBlock == null && e.Button == MouseButtons.Right)
-            {
-                isPanning = true;
-                lastMousePosition = e.Location;
-                Cursor = Cursors.SizeAll;
-            }
-
             BlockManager.EndEditingText(panelCanvas);
 
             panelCanvas.Invalidate();
@@ -91,10 +105,17 @@ namespace BlockDiagramEditor.WF
                 BlockManager.MoveBlock(e.X / tr.Scale, e.Y / tr.Scale, dragOffset);
             }
 
-            if (BlockManager.SelectedBlock == null && isPanning)
+            if (isPanning)
             {
                 tr.CanvasOffset = new PointF(tr.CanvasOffset.X + e.X - lastMousePosition.X, tr.CanvasOffset.Y + e.Y - lastMousePosition.Y);
                 lastMousePosition = e.Location;
+            }
+
+            if (isResizing && BlockManager.SelectedBlock != null && currentResizeHandle != ResizeHandle.None)
+            {
+                float canvasX = tr.STCX(e.X);
+                float canvasY = tr.STCY(e.Y);
+                BlockManager.ResizeSelectedBlock(currentResizeHandle, canvasX, canvasY);
             }
 
             panelCanvas.Invalidate();
@@ -105,12 +126,14 @@ namespace BlockDiagramEditor.WF
             isDragging = false;
             isPanning = false;
             Cursor = Cursors.Default;
-            BlockManager.SelectedBlock = null;
+            isResizing = false;
+            currentResizeHandle = ResizeHandle.None;
+
         }
 
         private void panelCanvas_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            BlockManager.StartEditingText(panelCanvas, e.X / tr.Scale, e.Y / tr.Scale);
+            BlockManager.StartEditingText(panelCanvas, e.X, e.Y);
             panelCanvas.Invalidate();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,6 @@ namespace BlockDiagramEditor.Models
 
         public virtual void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {
-
             PointF location = new PointF(X, Y);
             TextArea = new RectangleF(tr.CTSX(X + 5), tr.CTSY(Y + 5), tr.CTSS(Width - 10), tr.CTSS(Height - 10));
             StringFormat Format = new StringFormat
@@ -45,8 +45,64 @@ namespace BlockDiagramEditor.Models
                 LineAlignment = StringAlignment.Center
             };
             e.Graphics.DrawString(Text, new Font(Font.FontFamily, tr.CTSS(Font.Size)), Brushes.Black, TextArea, Format);
+
+            if (IsSelected)
+            {
+                float sx = tr.CTSX(X);
+                float sy = tr.CTSY(Y);
+                float sw = tr.CTSS(Width);
+                float sh = tr.CTSS(Height);
+
+                e.Graphics.DrawRectangle(new Pen(Color.Black, 1)
+                {
+                    DashStyle = DashStyle.Custom,
+                    DashPattern = new float[] { 5, 3 }
+                },
+                sx - 5, sy - 5, sw + 10, sh + 10);
+
+                e.Graphics.FillRectangle(Brushes.Black, sx - 10, sy - 10, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx + sw / 2 - 5, sy - 10, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx + sw, sy + sh, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx + sw, sy + sh / 2 - 5, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx + sw, sy - 10, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx + sw / 2 - 5, sy + sh, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx - 10, sy + sh, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Black, sx - 10, sy + sh / 2 - 5, 10, 10);
+            }
         }
 
-        public abstract bool Contains(float x, float y);
+        public bool Contains(float x, float y)
+        {
+            return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
+        }
+
+        public ResizeHandle GetResizeHandleAt(Point screenPoint, CoordinateTransformer tr)
+        {
+            float sx = tr.CTSX(X);
+            float sy = tr.CTSY(Y);
+            float sw = tr.CTSS(Width);
+            float sh = tr.CTSS(Height);
+            SizeF size = new SizeF(10, 10);
+
+            Dictionary<ResizeHandle, RectangleF> handles = new Dictionary<ResizeHandle, RectangleF>
+            {
+                { ResizeHandle.TopLeft, new RectangleF(sx - 10, sy - 10, 10, 10) },
+                { ResizeHandle.TopCenter, new RectangleF(sx + sw / 2 - 5, sy - 10, 10, 10) },
+                { ResizeHandle.TopRight, new RectangleF(sx + sw, sy - 10, 10, 10) },
+                { ResizeHandle.RightCenter, new RectangleF(sx + sw, sy + sh / 2 - 5, 10, 10) },
+                { ResizeHandle.BottomRight, new RectangleF(sx + sw, sy + sh, 10, 10) },
+                { ResizeHandle.BottomCenter, new RectangleF(sx + sw / 2 - 5, sy + sh, 10, 10) },
+                { ResizeHandle.BottomLeft, new RectangleF(sx - 10, sy + sh, 10, 10) },
+                { ResizeHandle.LeftCenter, new RectangleF(sx - 10, sy + sh / 2 - 5, 10, 10) }
+            };
+
+            foreach (var handle in handles)
+            {
+                if (handle.Value.Contains(screenPoint))
+                    return handle.Key;
+            }
+
+            return ResizeHandle.None;
+        }
     }
 }

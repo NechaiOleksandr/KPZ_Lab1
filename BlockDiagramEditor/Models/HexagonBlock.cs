@@ -34,13 +34,8 @@ namespace BlockDiagramEditor.Models
             path.AddLines(points);
             path.CloseFigure();
             e.Graphics.FillPath(Brushes.White, path);
-            e.Graphics.DrawPath(IsSelected ? new Pen(Color.Black, tr.CTSS(5)) : new Pen(Border.Color, tr.CTSS(Border.Width)), path);
+            e.Graphics.DrawPath(new Pen(Border.Color, tr.CTSS(Border.Width)), path);
             base.Draw(e, tr);
-        }
-
-        public override bool Contains(float x, float y)
-        {
-            return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
         }
     }
 }

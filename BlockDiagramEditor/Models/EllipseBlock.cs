@@ -22,13 +22,8 @@ namespace BlockDiagramEditor.Models
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.FillEllipse(Brushes.White, sx, sy, sw, sh);
-            e.Graphics.DrawEllipse(IsSelected ? new Pen(Color.Black, tr.CTSS(5)) : new Pen(Border.Color, tr.CTSS(Border.Width)), sx, sy, sw, sh);
+            e.Graphics.DrawEllipse(new Pen(Border.Color, tr.CTSS(Border.Width)), sx, sy, sw, sh);
             base.Draw(e, tr);
-        }
-
-        public override bool Contains(float x, float y)
-        {
-            return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
         }
     }
 }

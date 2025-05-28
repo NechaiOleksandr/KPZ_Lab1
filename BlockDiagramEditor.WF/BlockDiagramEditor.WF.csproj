@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -88,6 +89,24 @@
       <Project>{98555e26-ae97-4556-bd5b-299f9479f68c}</Project>
       <Name>BlockDiagramEditor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Terminator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paralelogram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Diamond.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hexagon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ellipse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

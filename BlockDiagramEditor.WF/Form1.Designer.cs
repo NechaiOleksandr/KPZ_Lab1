@@ -28,114 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSelectHexagon = new System.Windows.Forms.Button();
-            this.btnSelectDiamond = new System.Windows.Forms.Button();
-            this.btnSelectParalelogram = new System.Windows.Forms.Button();
-            this.btnSelectTerminator = new System.Windows.Forms.Button();
-            this.btnSelectRectangle = new System.Windows.Forms.Button();
-            this.btnSelectEllipse = new System.Windows.Forms.Button();
             this.btnDeleteBlock = new System.Windows.Forms.Button();
             this.showCenter = new System.Windows.Forms.CheckBox();
             this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
             this.labelScale = new System.Windows.Forms.Label();
+            this.btnSelectHexagon = new System.Windows.Forms.Button();
+            this.btnSelectDiamond = new System.Windows.Forms.Button();
+            this.btnSelectTerminator = new System.Windows.Forms.Button();
+            this.btnSelectParalelogram = new System.Windows.Forms.Button();
+            this.btnSelectEllipse = new System.Windows.Forms.Button();
+            this.btnSelectRectangle = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelCanvas.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnSelectHexagon
-            // 
-            this.btnSelectHexagon.BackColor = System.Drawing.Color.White;
-            this.btnSelectHexagon.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectHexagon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectHexagon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectHexagon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectHexagon.Location = new System.Drawing.Point(12, 228);
-            this.btnSelectHexagon.Name = "btnSelectHexagon";
-            this.btnSelectHexagon.Size = new System.Drawing.Size(133, 48);
-            this.btnSelectHexagon.TabIndex = 5;
-            this.btnSelectHexagon.TabStop = false;
-            this.btnSelectHexagon.Text = "Шестикутник";
-            this.btnSelectHexagon.UseVisualStyleBackColor = false;
-            this.btnSelectHexagon.Click += new System.EventHandler(this.btnSelectHexagon_Click);
-            // 
-            // btnSelectDiamond
-            // 
-            this.btnSelectDiamond.BackColor = System.Drawing.Color.White;
-            this.btnSelectDiamond.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectDiamond.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectDiamond.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectDiamond.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectDiamond.Location = new System.Drawing.Point(12, 174);
-            this.btnSelectDiamond.Name = "btnSelectDiamond";
-            this.btnSelectDiamond.Size = new System.Drawing.Size(133, 48);
-            this.btnSelectDiamond.TabIndex = 4;
-            this.btnSelectDiamond.TabStop = false;
-            this.btnSelectDiamond.Text = "Ромб";
-            this.btnSelectDiamond.UseVisualStyleBackColor = false;
-            this.btnSelectDiamond.Click += new System.EventHandler(this.btnSelectDiamond_Click);
-            // 
-            // btnSelectParalelogram
-            // 
-            this.btnSelectParalelogram.BackColor = System.Drawing.Color.White;
-            this.btnSelectParalelogram.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectParalelogram.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectParalelogram.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectParalelogram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectParalelogram.Location = new System.Drawing.Point(12, 66);
-            this.btnSelectParalelogram.Name = "btnSelectParalelogram";
-            this.btnSelectParalelogram.Size = new System.Drawing.Size(133, 48);
-            this.btnSelectParalelogram.TabIndex = 3;
-            this.btnSelectParalelogram.TabStop = false;
-            this.btnSelectParalelogram.Text = "Паралелограм";
-            this.btnSelectParalelogram.UseVisualStyleBackColor = false;
-            this.btnSelectParalelogram.Click += new System.EventHandler(this.btnSelectParalelogram_Click);
-            // 
-            // btnSelectTerminator
-            // 
-            this.btnSelectTerminator.BackColor = System.Drawing.Color.White;
-            this.btnSelectTerminator.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectTerminator.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectTerminator.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectTerminator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectTerminator.Location = new System.Drawing.Point(12, 12);
-            this.btnSelectTerminator.Name = "btnSelectTerminator";
-            this.btnSelectTerminator.Size = new System.Drawing.Size(133, 48);
-            this.btnSelectTerminator.TabIndex = 2;
-            this.btnSelectTerminator.TabStop = false;
-            this.btnSelectTerminator.Text = "Термінатор";
-            this.btnSelectTerminator.UseVisualStyleBackColor = false;
-            this.btnSelectTerminator.Click += new System.EventHandler(this.btnSelectTerminator_Click);
-            // 
-            // btnSelectRectangle
-            // 
-            this.btnSelectRectangle.BackColor = System.Drawing.Color.White;
-            this.btnSelectRectangle.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectRectangle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectRectangle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectRectangle.Location = new System.Drawing.Point(12, 120);
-            this.btnSelectRectangle.Name = "btnSelectRectangle";
-            this.btnSelectRectangle.Size = new System.Drawing.Size(133, 48);
-            this.btnSelectRectangle.TabIndex = 0;
-            this.btnSelectRectangle.TabStop = false;
-            this.btnSelectRectangle.Text = "Прямокутник";
-            this.btnSelectRectangle.UseVisualStyleBackColor = false;
-            this.btnSelectRectangle.Click += new System.EventHandler(this.btnSelectRectangle_Click);
-            // 
-            // btnSelectEllipse
-            // 
-            this.btnSelectEllipse.BackColor = System.Drawing.Color.White;
-            this.btnSelectEllipse.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectEllipse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectEllipse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectEllipse.Location = new System.Drawing.Point(12, 282);
-            this.btnSelectEllipse.Name = "btnSelectEllipse";
-            this.btnSelectEllipse.Size = new System.Drawing.Size(133, 48);
-            this.btnSelectEllipse.TabIndex = 1;
-            this.btnSelectEllipse.TabStop = false;
-            this.btnSelectEllipse.Text = "Еліпс";
-            this.btnSelectEllipse.UseVisualStyleBackColor = false;
-            this.btnSelectEllipse.Click += new System.EventHandler(this.btnSelectEllipse_Click);
             // 
             // btnDeleteBlock
             // 
@@ -144,9 +49,9 @@
             this.btnDeleteBlock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnDeleteBlock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnDeleteBlock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteBlock.Location = new System.Drawing.Point(12, 493);
+            this.btnDeleteBlock.Location = new System.Drawing.Point(12, 516);
             this.btnDeleteBlock.Name = "btnDeleteBlock";
-            this.btnDeleteBlock.Size = new System.Drawing.Size(133, 48);
+            this.btnDeleteBlock.Size = new System.Drawing.Size(130, 65);
             this.btnDeleteBlock.TabIndex = 6;
             this.btnDeleteBlock.TabStop = false;
             this.btnDeleteBlock.Text = "Видалити блок";
@@ -158,7 +63,7 @@
             this.showCenter.AutoSize = true;
             this.showCenter.Checked = true;
             this.showCenter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showCenter.Location = new System.Drawing.Point(12, 467);
+            this.showCenter.Location = new System.Drawing.Point(12, 490);
             this.showCenter.Name = "showCenter";
             this.showCenter.Size = new System.Drawing.Size(135, 20);
             this.showCenter.TabIndex = 7;
@@ -175,7 +80,7 @@
             this.panelCanvas.Controls.Add(this.labelScale);
             this.panelCanvas.Location = new System.Drawing.Point(151, 12);
             this.panelCanvas.Name = "panelCanvas";
-            this.panelCanvas.Size = new System.Drawing.Size(751, 529);
+            this.panelCanvas.Size = new System.Drawing.Size(860, 572);
             this.panelCanvas.TabIndex = 2;
             this.panelCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCanvas_Paint);
             this.panelCanvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDoubleClick);
@@ -187,18 +92,130 @@
             // 
             this.labelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelScale.AutoSize = true;
-            this.labelScale.Location = new System.Drawing.Point(3, 510);
+            this.labelScale.Location = new System.Drawing.Point(3, 553);
             this.labelScale.Name = "labelScale";
             this.labelScale.Size = new System.Drawing.Size(104, 16);
             this.labelScale.TabIndex = 0;
             this.labelScale.Text = "Масштаб: 100%";
+            // 
+            // btnSelectHexagon
+            // 
+            this.btnSelectHexagon.BackColor = System.Drawing.Color.White;
+            this.btnSelectHexagon.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Hexagon;
+            this.btnSelectHexagon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectHexagon.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectHexagon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectHexagon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectHexagon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectHexagon.Location = new System.Drawing.Point(12, 296);
+            this.btnSelectHexagon.Name = "btnSelectHexagon";
+            this.btnSelectHexagon.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectHexagon.TabIndex = 5;
+            this.btnSelectHexagon.TabStop = false;
+            this.btnSelectHexagon.UseVisualStyleBackColor = false;
+            this.btnSelectHexagon.Click += new System.EventHandler(this.btnSelectHexagon_Click);
+            // 
+            // btnSelectDiamond
+            // 
+            this.btnSelectDiamond.BackColor = System.Drawing.Color.White;
+            this.btnSelectDiamond.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Diamond;
+            this.btnSelectDiamond.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectDiamond.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectDiamond.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectDiamond.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectDiamond.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectDiamond.Location = new System.Drawing.Point(12, 225);
+            this.btnSelectDiamond.Name = "btnSelectDiamond";
+            this.btnSelectDiamond.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectDiamond.TabIndex = 4;
+            this.btnSelectDiamond.TabStop = false;
+            this.btnSelectDiamond.UseVisualStyleBackColor = false;
+            this.btnSelectDiamond.Click += new System.EventHandler(this.btnSelectDiamond_Click);
+            // 
+            // btnSelectTerminator
+            // 
+            this.btnSelectTerminator.BackColor = System.Drawing.Color.White;
+            this.btnSelectTerminator.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Terminator;
+            this.btnSelectTerminator.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectTerminator.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectTerminator.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectTerminator.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectTerminator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectTerminator.Location = new System.Drawing.Point(12, 12);
+            this.btnSelectTerminator.Name = "btnSelectTerminator";
+            this.btnSelectTerminator.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectTerminator.TabIndex = 2;
+            this.btnSelectTerminator.TabStop = false;
+            this.btnSelectTerminator.UseVisualStyleBackColor = false;
+            this.btnSelectTerminator.Click += new System.EventHandler(this.btnSelectTerminator_Click);
+            // 
+            // btnSelectParalelogram
+            // 
+            this.btnSelectParalelogram.BackColor = System.Drawing.Color.White;
+            this.btnSelectParalelogram.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Paralelogram;
+            this.btnSelectParalelogram.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectParalelogram.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectParalelogram.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectParalelogram.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectParalelogram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectParalelogram.Location = new System.Drawing.Point(12, 83);
+            this.btnSelectParalelogram.Name = "btnSelectParalelogram";
+            this.btnSelectParalelogram.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectParalelogram.TabIndex = 3;
+            this.btnSelectParalelogram.TabStop = false;
+            this.btnSelectParalelogram.UseVisualStyleBackColor = false;
+            this.btnSelectParalelogram.Click += new System.EventHandler(this.btnSelectParalelogram_Click);
+            // 
+            // btnSelectEllipse
+            // 
+            this.btnSelectEllipse.BackColor = System.Drawing.Color.White;
+            this.btnSelectEllipse.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Ellipse;
+            this.btnSelectEllipse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectEllipse.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectEllipse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectEllipse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectEllipse.Location = new System.Drawing.Point(12, 367);
+            this.btnSelectEllipse.Name = "btnSelectEllipse";
+            this.btnSelectEllipse.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectEllipse.TabIndex = 1;
+            this.btnSelectEllipse.TabStop = false;
+            this.btnSelectEllipse.UseVisualStyleBackColor = false;
+            this.btnSelectEllipse.Click += new System.EventHandler(this.btnSelectEllipse_Click);
+            // 
+            // btnSelectRectangle
+            // 
+            this.btnSelectRectangle.BackColor = System.Drawing.Color.White;
+            this.btnSelectRectangle.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Rectangle;
+            this.btnSelectRectangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectRectangle.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectRectangle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectRectangle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectRectangle.Location = new System.Drawing.Point(12, 154);
+            this.btnSelectRectangle.Name = "btnSelectRectangle";
+            this.btnSelectRectangle.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectRectangle.TabIndex = 0;
+            this.btnSelectRectangle.TabStop = false;
+            this.btnSelectRectangle.UseVisualStyleBackColor = false;
+            this.btnSelectRectangle.Click += new System.EventHandler(this.btnSelectRectangle_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(63, 468);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(914, 553);
+            this.ClientSize = new System.Drawing.Size(1023, 596);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.showCenter);
             this.Controls.Add(this.btnDeleteBlock);
             this.Controls.Add(this.btnSelectHexagon);
@@ -232,6 +249,7 @@
         private System.Windows.Forms.Button btnDeleteBlock;
         private System.Windows.Forms.Label labelScale;
         private System.Windows.Forms.CheckBox showCenter;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -75,14 +75,14 @@ namespace BlockDiagramEditor.Services
         {
             if (SelectedBlock != null)
             {
-                SelectedBlock.X = (x - offset.X) - (x - offset.X) % 10;
-                SelectedBlock.Y = (y - offset.Y) - (y - offset.Y) % 10;
+                SelectedBlock.X = (x - offset.X - 10) - (x - offset.X - 10) % 10;
+                SelectedBlock.Y = (y - offset.Y - 10) - (y - offset.Y - 10) % 10;
             }
         }
 
         public void StartEditingText(Control canvas, float x, float y)
         {
-            EditingBlock = Blocks.LastOrDefault(block => block.Contains(x - Tr.CanvasOffset.X, y - Tr.CanvasOffset.Y));
+            EditingBlock = Blocks.LastOrDefault(block => block.Contains(Tr.STCX(x), Tr.STCY(y)));
             if (EditingBlock != null)
             {
                 EditText = new TextBox()
@@ -91,7 +91,7 @@ namespace BlockDiagramEditor.Services
                     Size = new Size((int)Tr.CTSS(EditingBlock.Width - 10), (int)Tr.CTSS(EditingBlock.Height - 10)),
                     Text = EditingBlock.Text,
                     Multiline = true,
-                    Font = new Font(EditingBlock.Font.FontFamily, Tr.CTSS(EditingBlock.Font.Size)),
+                    Font = new Font(EditingBlock.Font.FontFamily, (int)Tr.CTSS(EditingBlock.Font.Size)),
                     TextAlign = HorizontalAlignment.Center,
                     BorderStyle = BorderStyle.None,
                 };
@@ -109,6 +109,83 @@ namespace BlockDiagramEditor.Services
                 canvas.Controls.Remove(EditText);
                 EditingBlock = null;
                 EditText = null;
+            }
+        }
+
+        public void ResizeSelectedBlock(ResizeHandle handle, float canvasX, float canvasY)
+        {
+            //if (SelectedBlock == null || handle == ResizeHandle.None)
+            //    return;
+
+            var block = SelectedBlock;
+
+            switch (handle)
+            {
+                case ResizeHandle.BottomRight:
+                    if ((canvasX - block.X) - (canvasX - block.X) % 10 >= 30)
+                        block.Width = (canvasX - block.X) - (canvasX - block.X) % 10;
+                    if ((canvasY - block.Y) - (canvasY - block.Y) % 10 >= 30)
+                        block.Height = (canvasY - block.Y) - (canvasY - block.Y) % 10;
+                    break;
+
+                case ResizeHandle.RightCenter:
+                    if ((canvasX - block.X) - (canvasX - block.X) % 10 >= 30)
+                        block.Width = (canvasX - block.X) - (canvasX - block.X) % 10;
+                    break;
+
+                case ResizeHandle.BottomCenter:
+                    if ((canvasY - block.Y) - (canvasY - block.Y) % 10 >= 30)
+                        block.Height = (canvasY - block.Y) - (canvasY - block.Y) % 10;
+                    break;
+
+                case ResizeHandle.TopLeft:
+                    if ((block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10 >= 30)
+                    {
+                        block.Width = (block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10;
+                        block.X += (block.Width - ((block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10));
+                    }
+                    if ((block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10 >= 30)
+                    {
+                        block.Height = (block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10;
+                        block.Y += (block.Height - ((block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10));
+                    }
+                    break;
+                        
+                case ResizeHandle.TopCenter:
+                    if ((block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10 >= 30)
+                    {
+                        block.Height = (block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10;
+                        block.Y += (block.Height - ((block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10));
+                    }
+                    break;
+
+                case ResizeHandle.LeftCenter:
+                    if ((block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10 >= 30)
+                    {
+                        block.Width = (block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10;
+                        block.X += (block.Width - ((block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10));
+                    }
+                    break;
+
+                case ResizeHandle.TopRight:
+                    if ((canvasX - block.X) - (canvasX - block.X) % 10 >= 30)
+                        block.Width = (canvasX - block.X) - (canvasX - block.X) % 10;
+                    if ((block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10 >= 30)
+                    {
+                        block.Height = (block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10;
+                        block.Y += (block.Height - ((block.Height + (block.Y - canvasY)) - (block.Height + (block.Y - canvasY)) % 10));
+                    }
+                    break;
+
+                case ResizeHandle.BottomLeft:
+                    if ((block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10 >= 30)
+                    {
+                        block.Width = (block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10;
+                        block.X += (block.Width - ((block.Width + (block.X - canvasX)) - (block.Width + (block.X - canvasX)) % 10));
+                    }
+                    if ((canvasY - block.Y) - (canvasY - block.Y) % 10 >= 30)
+                        block.Height = (canvasY - block.Y) - (canvasY - block.Y) % 10;
+                    break;
             }
         }
     }

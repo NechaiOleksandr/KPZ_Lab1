@@ -23,13 +23,8 @@ namespace BlockDiagramEditor.Models
             float sh = tr.CTSS(Height);
 
             e.Graphics.FillRectangle(Brushes.White,sx, sy, sw, sh);
-            e.Graphics.DrawRectangle(IsSelected ? new Pen(Color.Black, tr.CTSS(5)) : new Pen(Border.Color, tr.CTSS(Border.Width)), sx, sy, sw, sh);
+            e.Graphics.DrawRectangle(new Pen(Border.Color, tr.CTSS(Border.Width)), sx, sy, sw, sh);
             base.Draw(e, tr);
-        }
-
-        public override bool Contains(float x, float y)
-        {
-            return x >= X && x <= X + Width && y >= Y && y <= Y + Height;
         }
     }
 }
