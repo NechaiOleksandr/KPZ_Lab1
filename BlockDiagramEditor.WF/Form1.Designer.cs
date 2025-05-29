@@ -30,8 +30,7 @@
         {
             this.btnDeleteBlock = new System.Windows.Forms.Button();
             this.showCenter = new System.Windows.Forms.CheckBox();
-            this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
-            this.labelScale = new System.Windows.Forms.Label();
+            this.btnSelectArrow = new System.Windows.Forms.Button();
             this.btnSelectHexagon = new System.Windows.Forms.Button();
             this.btnSelectDiamond = new System.Windows.Forms.Button();
             this.btnSelectTerminator = new System.Windows.Forms.Button();
@@ -39,6 +38,8 @@
             this.btnSelectEllipse = new System.Windows.Forms.Button();
             this.btnSelectRectangle = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
+            this.labelScale = new System.Windows.Forms.Label();
             this.panelCanvas.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             this.btnDeleteBlock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnDeleteBlock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnDeleteBlock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteBlock.Location = new System.Drawing.Point(12, 516);
+            this.btnDeleteBlock.Location = new System.Drawing.Point(12, 549);
             this.btnDeleteBlock.Name = "btnDeleteBlock";
             this.btnDeleteBlock.Size = new System.Drawing.Size(130, 65);
             this.btnDeleteBlock.TabIndex = 6;
@@ -63,7 +64,7 @@
             this.showCenter.AutoSize = true;
             this.showCenter.Checked = true;
             this.showCenter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showCenter.Location = new System.Drawing.Point(12, 490);
+            this.showCenter.Location = new System.Drawing.Point(12, 523);
             this.showCenter.Name = "showCenter";
             this.showCenter.Size = new System.Drawing.Size(135, 20);
             this.showCenter.TabIndex = 7;
@@ -71,32 +72,22 @@
             this.showCenter.UseVisualStyleBackColor = true;
             this.showCenter.CheckedChanged += new System.EventHandler(this.showCenter_CheckedChanged);
             // 
-            // panelCanvas
+            // btnSelectArrow
             // 
-            this.panelCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCanvas.BackColor = System.Drawing.Color.Silver;
-            this.panelCanvas.Controls.Add(this.labelScale);
-            this.panelCanvas.Location = new System.Drawing.Point(151, 12);
-            this.panelCanvas.Name = "panelCanvas";
-            this.panelCanvas.Size = new System.Drawing.Size(860, 572);
-            this.panelCanvas.TabIndex = 2;
-            this.panelCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCanvas_Paint);
-            this.panelCanvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDoubleClick);
-            this.panelCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDown);
-            this.panelCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseMove);
-            this.panelCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseUp);
-            // 
-            // labelScale
-            // 
-            this.labelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelScale.AutoSize = true;
-            this.labelScale.Location = new System.Drawing.Point(3, 553);
-            this.labelScale.Name = "labelScale";
-            this.labelScale.Size = new System.Drawing.Size(104, 16);
-            this.labelScale.TabIndex = 0;
-            this.labelScale.Text = "Масштаб: 100%";
+            this.btnSelectArrow.BackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Arrow;
+            this.btnSelectArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectArrow.Location = new System.Drawing.Point(12, 438);
+            this.btnSelectArrow.Name = "btnSelectArrow";
+            this.btnSelectArrow.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectArrow.TabIndex = 8;
+            this.btnSelectArrow.TabStop = false;
+            this.btnSelectArrow.UseVisualStyleBackColor = false;
+            this.btnSelectArrow.Click += new System.EventHandler(this.btnSelectArrow_Click);
             // 
             // btnSelectHexagon
             // 
@@ -203,19 +194,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 468);
+            this.label1.Location = new System.Drawing.Point(12, 506);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 8;
+            this.label1.TabIndex = 1;
             this.label1.Text = "label1";
+            // 
+            // panelCanvas
+            // 
+            this.panelCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelCanvas.BackColor = System.Drawing.Color.DarkGray;
+            this.panelCanvas.Controls.Add(this.labelScale);
+            this.panelCanvas.Location = new System.Drawing.Point(151, 12);
+            this.panelCanvas.Name = "panelCanvas";
+            this.panelCanvas.Size = new System.Drawing.Size(920, 602);
+            this.panelCanvas.TabIndex = 2;
+            this.panelCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCanvas_Paint);
+            this.panelCanvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDoubleClick);
+            this.panelCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDown);
+            this.panelCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseMove);
+            this.panelCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseUp);
+            // 
+            // labelScale
+            // 
+            this.labelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelScale.AutoSize = true;
+            this.labelScale.Location = new System.Drawing.Point(3, 583);
+            this.labelScale.Name = "labelScale";
+            this.labelScale.Size = new System.Drawing.Size(104, 16);
+            this.labelScale.TabIndex = 0;
+            this.labelScale.Text = "Масштаб: 100%";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1023, 596);
+            this.ClientSize = new System.Drawing.Size(1083, 626);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnSelectArrow);
             this.Controls.Add(this.showCenter);
             this.Controls.Add(this.btnDeleteBlock);
             this.Controls.Add(this.btnSelectHexagon);
@@ -249,6 +268,7 @@
         private System.Windows.Forms.Button btnDeleteBlock;
         private System.Windows.Forms.Label labelScale;
         private System.Windows.Forms.CheckBox showCenter;
+        private System.Windows.Forms.Button btnSelectArrow;
         private System.Windows.Forms.Label label1;
     }
 }

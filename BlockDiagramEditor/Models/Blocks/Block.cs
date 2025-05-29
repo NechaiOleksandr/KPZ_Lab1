@@ -31,7 +31,7 @@ namespace BlockDiagramEditor.Models
             Height = 80;
             Text = string.Empty;
             Font = new Font("consolas", 12);
-            Border = new Pen(Color.Black, 1);
+            Border = new Pen(Color.Black, 2);
             IsSelected = false;
         }
 
@@ -82,7 +82,6 @@ namespace BlockDiagramEditor.Models
             float sy = tr.CTSY(Y);
             float sw = tr.CTSS(Width);
             float sh = tr.CTSS(Height);
-            SizeF size = new SizeF(10, 10);
 
             Dictionary<ResizeHandle, RectangleF> handles = new Dictionary<ResizeHandle, RectangleF>
             {

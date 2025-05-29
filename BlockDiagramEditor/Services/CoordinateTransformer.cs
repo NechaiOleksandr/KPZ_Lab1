@@ -19,7 +19,7 @@ namespace BlockDiagramEditor.Services
                 Scale -= 0.1F;
                 Scale = (float)Math.Round(Scale, 1);
             }
-            else if (delta > 0 && Scale < 2.5)
+            else if (delta > 0 && Scale < 5)
             {
                 Scale += 0.1F;
                 Scale = (float)Math.Round(Scale, 1);

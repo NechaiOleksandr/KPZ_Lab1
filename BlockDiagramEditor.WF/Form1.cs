@@ -22,7 +22,9 @@ namespace BlockDiagramEditor.WF
         };
         private CoordinateTransformer tr = new CoordinateTransformer();
         private BlockManager BlockManager;
-        private ResizeHandle currentResizeHandle = ResizeHandle.None;
+        private ArrowManager ArrowManager;
+        private ResizeHandle currentBlockResizeHandle = ResizeHandle.None;
+        private int currentArrowResizeHandle = -1;
         private bool isResizing = false;
 
         public Form1()
@@ -30,6 +32,7 @@ namespace BlockDiagramEditor.WF
             InitializeComponent();
             panelCanvas.MouseWheel += PanelCanvas_MouseWheel;
             BlockManager = new BlockManager(tr);
+            ArrowManager = new ArrowManager(tr);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -55,10 +58,21 @@ namespace BlockDiagramEditor.WF
                 e.Graphics.DrawLine(centerLine, tr.CanvasOffset.X, tr.CanvasOffset.Y % 8 - 5, tr.CanvasOffset.X, panelCanvas.Height);
             }
             foreach (var block in BlockManager.Blocks) block.Draw(e, tr);
+            foreach (var arrow in ArrowManager.Arrows) arrow.Draw(e, tr);
         }
 
         private void panelCanvas_MouseDown(object sender, MouseEventArgs e)
         {
+
+            if (ArrowManager.SelectedArrow != null)
+            {
+                label1.Text = ArrowManager.SelectedArrow.GetHandleAt(e.Location, tr).ToString();
+            }
+            else
+            {
+                label1.Text = "нема";
+            }
+
             if (e.Button == MouseButtons.Right)
             {
                 isPanning = true;
@@ -68,8 +82,19 @@ namespace BlockDiagramEditor.WF
 
             if (BlockManager.SelectedBlock != null && e.Button == MouseButtons.Left)
             {
-                currentResizeHandle = BlockManager.SelectedBlock.GetResizeHandleAt(e.Location, tr);
-                if (currentResizeHandle != ResizeHandle.None)
+                currentBlockResizeHandle = BlockManager.SelectedBlock.GetResizeHandleAt(e.Location, tr);
+                if (currentBlockResizeHandle != ResizeHandle.None)
+                {
+                    isResizing = true;
+                    BlockManager.EndEditingText(panelCanvas);
+                    return;
+                }
+            }
+
+            if (ArrowManager.SelectedArrow != null && e.Button == MouseButtons.Left)
+            {
+                currentArrowResizeHandle = ArrowManager.SelectedArrow.GetHandleAt(e.Location, tr);
+                if (currentArrowResizeHandle != -1)
                 {
                     isResizing = true;
                     return;
@@ -78,19 +103,28 @@ namespace BlockDiagramEditor.WF
 
             if (e.Button == MouseButtons.Left && selectedModel == 0)
             {
+                if (BlockManager.SelectedBlock == null)
+                ArrowManager.SelectArrow(e.X, e.Y);
+                if (ArrowManager.SelectedArrow == null)
                 BlockManager.SelectBlock(e.X, e.Y);
             }
 
             if (selectedModel != 0)
             {
-                BlockManager.AddBlock(selectedModel, e.X, e.Y);
+                if (selectedModel <= 6)
+                    BlockManager.AddBlock(selectedModel, e.X, e.Y);
+                else
+                    ArrowManager.AddArrow(selectedModel - 6, e.X, e.Y);
                 selectedModel = 0;
             }
 
-            if (BlockManager.SelectedBlock != null && selectedModel == 0 && e.Button == MouseButtons.Left)
+            if ((BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null) && selectedModel == 0 && e.Button == MouseButtons.Left)
             {
                 isDragging = true;
-                dragOffset = new PointF(e.X / tr.Scale - BlockManager.SelectedBlock.X, e.Y / tr.Scale - BlockManager.SelectedBlock.Y);
+                if (ArrowManager.SelectedArrow != null)
+                    dragOffset = new PointF(e.X / tr.Scale - ArrowManager.SelectedArrow.StartX, e.Y / tr.Scale - ArrowManager.SelectedArrow.StartY);
+                else if (BlockManager.SelectedBlock != null)
+                    dragOffset = new PointF(e.X / tr.Scale - BlockManager.SelectedBlock.X, e.Y / tr.Scale - BlockManager.SelectedBlock.Y);
             }
 
             BlockManager.EndEditingText(panelCanvas);
@@ -103,6 +137,7 @@ namespace BlockDiagramEditor.WF
             if (isDragging)
             {
                 BlockManager.MoveBlock(e.X / tr.Scale, e.Y / tr.Scale, dragOffset);
+                ArrowManager.MoveArrow(e.X / tr.Scale, e.Y / tr.Scale, dragOffset);
             }
 
             if (isPanning)
@@ -111,11 +146,12 @@ namespace BlockDiagramEditor.WF
                 lastMousePosition = e.Location;
             }
 
-            if (isResizing && BlockManager.SelectedBlock != null && currentResizeHandle != ResizeHandle.None)
+            if (isResizing && (BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null))
             {
-                float canvasX = tr.STCX(e.X);
-                float canvasY = tr.STCY(e.Y);
-                BlockManager.ResizeSelectedBlock(currentResizeHandle, canvasX, canvasY);
+                if (ArrowManager.SelectedArrow != null && currentArrowResizeHandle != -1)
+                    ArrowManager.ResizeSelectedArrow(currentArrowResizeHandle, tr.STCX(e.X), tr.STCY(e.Y));
+                else if (BlockManager.SelectedBlock != null && currentBlockResizeHandle != ResizeHandle.None)
+                    BlockManager.ResizeSelectedBlock(currentBlockResizeHandle, tr.STCX(e.X), tr.STCY(e.Y));
             }
 
             panelCanvas.Invalidate();
@@ -127,7 +163,8 @@ namespace BlockDiagramEditor.WF
             isPanning = false;
             Cursor = Cursors.Default;
             isResizing = false;
-            currentResizeHandle = ResizeHandle.None;
+            currentBlockResizeHandle = ResizeHandle.None;
+            currentArrowResizeHandle = -1;
 
         }
 
@@ -173,9 +210,16 @@ namespace BlockDiagramEditor.WF
             ActiveControl = null;
         }
 
+        private void btnSelectArrow_Click(object sender, EventArgs e)
+        {
+            selectedModel = 7;
+            ActiveControl = null;
+        }
+
         private void btnDeleteBlock_Click(object sender, EventArgs e)
         {
             BlockManager.DeleteBlock(panelCanvas);
+            ArrowManager.DeleteArrow(panelCanvas);
             ActiveControl = null;
             panelCanvas.Invalidate();
         }
@@ -190,6 +234,7 @@ namespace BlockDiagramEditor.WF
             if (e.KeyCode == Keys.Delete)
             {
                 BlockManager.DeleteBlock(panelCanvas);
+                ArrowManager.DeleteArrow(panelCanvas);
                 panelCanvas.Invalidate();
             }
         }
