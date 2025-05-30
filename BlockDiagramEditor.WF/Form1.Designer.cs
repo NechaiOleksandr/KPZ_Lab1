@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDeleteBlock = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.btnDelete = new System.Windows.Forms.Button();
             this.showCenter = new System.Windows.Forms.CheckBox();
             this.btnSelectArrow = new System.Windows.Forms.Button();
             this.btnSelectHexagon = new System.Windows.Forms.Button();
@@ -37,34 +38,42 @@
             this.btnSelectParalelogram = new System.Windows.Forms.Button();
             this.btnSelectEllipse = new System.Windows.Forms.Button();
             this.btnSelectRectangle = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.BlocksPanel = new System.Windows.Forms.Panel();
+            this.labelBlocks = new System.Windows.Forms.Label();
+            this.labelArrows = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
             this.labelScale = new System.Windows.Forms.Label();
+            this.BlocksPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelCanvas.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnDeleteBlock
+            // btnDelete
             // 
-            this.btnDeleteBlock.BackColor = System.Drawing.Color.White;
-            this.btnDeleteBlock.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnDeleteBlock.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnDeleteBlock.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnDeleteBlock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteBlock.Location = new System.Drawing.Point(12, 549);
-            this.btnDeleteBlock.Name = "btnDeleteBlock";
-            this.btnDeleteBlock.Size = new System.Drawing.Size(130, 65);
-            this.btnDeleteBlock.TabIndex = 6;
-            this.btnDeleteBlock.TabStop = false;
-            this.btnDeleteBlock.Text = "Видалити блок";
-            this.btnDeleteBlock.UseVisualStyleBackColor = false;
-            this.btnDeleteBlock.Click += new System.EventHandler(this.btnDeleteBlock_Click);
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDelete.Location = new System.Drawing.Point(12, 523);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(157, 65);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.TabStop = false;
+            this.btnDelete.Text = "Видалити";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // showCenter
             // 
+            this.showCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.showCenter.AutoSize = true;
             this.showCenter.Checked = true;
             this.showCenter.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showCenter.Location = new System.Drawing.Point(12, 523);
+            this.showCenter.Location = new System.Drawing.Point(12, 591);
             this.showCenter.Name = "showCenter";
             this.showCenter.Size = new System.Drawing.Size(135, 20);
             this.showCenter.TabIndex = 7;
@@ -74,6 +83,7 @@
             // 
             // btnSelectArrow
             // 
+            this.btnSelectArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSelectArrow.BackColor = System.Drawing.Color.White;
             this.btnSelectArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Arrow;
             this.btnSelectArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -81,7 +91,7 @@
             this.btnSelectArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectArrow.Location = new System.Drawing.Point(12, 438);
+            this.btnSelectArrow.Location = new System.Drawing.Point(3, 3);
             this.btnSelectArrow.Name = "btnSelectArrow";
             this.btnSelectArrow.Size = new System.Drawing.Size(130, 65);
             this.btnSelectArrow.TabIndex = 8;
@@ -98,7 +108,7 @@
             this.btnSelectHexagon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectHexagon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectHexagon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectHexagon.Location = new System.Drawing.Point(12, 296);
+            this.btnSelectHexagon.Location = new System.Drawing.Point(3, 287);
             this.btnSelectHexagon.Name = "btnSelectHexagon";
             this.btnSelectHexagon.Size = new System.Drawing.Size(130, 65);
             this.btnSelectHexagon.TabIndex = 5;
@@ -115,7 +125,7 @@
             this.btnSelectDiamond.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectDiamond.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectDiamond.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectDiamond.Location = new System.Drawing.Point(12, 225);
+            this.btnSelectDiamond.Location = new System.Drawing.Point(3, 216);
             this.btnSelectDiamond.Name = "btnSelectDiamond";
             this.btnSelectDiamond.Size = new System.Drawing.Size(130, 65);
             this.btnSelectDiamond.TabIndex = 4;
@@ -132,7 +142,7 @@
             this.btnSelectTerminator.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectTerminator.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectTerminator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectTerminator.Location = new System.Drawing.Point(12, 12);
+            this.btnSelectTerminator.Location = new System.Drawing.Point(3, 3);
             this.btnSelectTerminator.Name = "btnSelectTerminator";
             this.btnSelectTerminator.Size = new System.Drawing.Size(130, 65);
             this.btnSelectTerminator.TabIndex = 2;
@@ -149,7 +159,7 @@
             this.btnSelectParalelogram.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectParalelogram.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectParalelogram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectParalelogram.Location = new System.Drawing.Point(12, 83);
+            this.btnSelectParalelogram.Location = new System.Drawing.Point(3, 74);
             this.btnSelectParalelogram.Name = "btnSelectParalelogram";
             this.btnSelectParalelogram.Size = new System.Drawing.Size(130, 65);
             this.btnSelectParalelogram.TabIndex = 3;
@@ -166,7 +176,7 @@
             this.btnSelectEllipse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectEllipse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectEllipse.Location = new System.Drawing.Point(12, 367);
+            this.btnSelectEllipse.Location = new System.Drawing.Point(3, 358);
             this.btnSelectEllipse.Name = "btnSelectEllipse";
             this.btnSelectEllipse.Size = new System.Drawing.Size(130, 65);
             this.btnSelectEllipse.TabIndex = 1;
@@ -183,7 +193,7 @@
             this.btnSelectRectangle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSelectRectangle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSelectRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectRectangle.Location = new System.Drawing.Point(12, 154);
+            this.btnSelectRectangle.Location = new System.Drawing.Point(3, 145);
             this.btnSelectRectangle.Name = "btnSelectRectangle";
             this.btnSelectRectangle.Size = new System.Drawing.Size(130, 65);
             this.btnSelectRectangle.TabIndex = 0;
@@ -191,14 +201,52 @@
             this.btnSelectRectangle.UseVisualStyleBackColor = false;
             this.btnSelectRectangle.Click += new System.EventHandler(this.btnSelectRectangle_Click);
             // 
-            // label1
+            // BlocksPanel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 506);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.BlocksPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.BlocksPanel.AutoScroll = true;
+            this.BlocksPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.BlocksPanel.Controls.Add(this.btnSelectTerminator);
+            this.BlocksPanel.Controls.Add(this.btnSelectParalelogram);
+            this.BlocksPanel.Controls.Add(this.btnSelectRectangle);
+            this.BlocksPanel.Controls.Add(this.btnSelectEllipse);
+            this.BlocksPanel.Controls.Add(this.btnSelectDiamond);
+            this.BlocksPanel.Controls.Add(this.btnSelectHexagon);
+            this.BlocksPanel.Location = new System.Drawing.Point(12, 31);
+            this.BlocksPanel.Name = "BlocksPanel";
+            this.BlocksPanel.Size = new System.Drawing.Size(157, 352);
+            this.BlocksPanel.TabIndex = 9;
+            // 
+            // labelBlocks
+            // 
+            this.labelBlocks.AutoSize = true;
+            this.labelBlocks.Location = new System.Drawing.Point(9, 12);
+            this.labelBlocks.Name = "labelBlocks";
+            this.labelBlocks.Size = new System.Drawing.Size(47, 16);
+            this.labelBlocks.TabIndex = 10;
+            this.labelBlocks.Text = "Блоки";
+            // 
+            // labelArrows
+            // 
+            this.labelArrows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelArrows.AutoSize = true;
+            this.labelArrows.Location = new System.Drawing.Point(12, 386);
+            this.labelArrows.Name = "labelArrows";
+            this.labelArrows.Size = new System.Drawing.Size(50, 16);
+            this.labelArrows.TabIndex = 11;
+            this.labelArrows.Text = "Cрілки";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.btnSelectArrow);
+            this.panel1.Location = new System.Drawing.Point(12, 405);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(157, 112);
+            this.panel1.TabIndex = 10;
             // 
             // panelCanvas
             // 
@@ -207,9 +255,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCanvas.BackColor = System.Drawing.Color.DarkGray;
             this.panelCanvas.Controls.Add(this.labelScale);
-            this.panelCanvas.Location = new System.Drawing.Point(151, 12);
+            this.panelCanvas.Location = new System.Drawing.Point(175, 12);
             this.panelCanvas.Name = "panelCanvas";
-            this.panelCanvas.Size = new System.Drawing.Size(920, 602);
+            this.panelCanvas.Size = new System.Drawing.Size(896, 602);
             this.panelCanvas.TabIndex = 2;
             this.panelCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCanvas_Paint);
             this.panelCanvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDoubleClick);
@@ -233,22 +281,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1083, 626);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnSelectArrow);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.showCenter);
-            this.Controls.Add(this.btnDeleteBlock);
-            this.Controls.Add(this.btnSelectHexagon);
+            this.Controls.Add(this.labelArrows);
+            this.Controls.Add(this.labelBlocks);
+            this.Controls.Add(this.BlocksPanel);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.panelCanvas);
-            this.Controls.Add(this.btnSelectDiamond);
-            this.Controls.Add(this.btnSelectTerminator);
-            this.Controls.Add(this.btnSelectParalelogram);
-            this.Controls.Add(this.btnSelectEllipse);
-            this.Controls.Add(this.btnSelectRectangle);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Block Diagram Editor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.BlocksPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panelCanvas.ResumeLayout(false);
             this.panelCanvas.PerformLayout();
             this.ResumeLayout(false);
@@ -265,11 +313,14 @@
         private System.Windows.Forms.Button btnSelectHexagon;
         private System.Windows.Forms.Button btnSelectDiamond;
         private System.Windows.Forms.Button btnSelectParalelogram;
-        private System.Windows.Forms.Button btnDeleteBlock;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label labelScale;
         private System.Windows.Forms.CheckBox showCenter;
         private System.Windows.Forms.Button btnSelectArrow;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel BlocksPanel;
+        private System.Windows.Forms.Label labelBlocks;
+        private System.Windows.Forms.Label labelArrows;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

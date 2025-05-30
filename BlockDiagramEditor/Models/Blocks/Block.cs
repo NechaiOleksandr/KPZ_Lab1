@@ -12,6 +12,7 @@ namespace BlockDiagramEditor.Models
 {
     public abstract class Block
     {
+        public string Type => GetType().Name;
         public float X { get; set; }
         public float Y { get; set; }
         public float Width { get; set; }
@@ -61,13 +62,21 @@ namespace BlockDiagramEditor.Models
                 sx - 5, sy - 5, sw + 10, sh + 10);
 
                 e.Graphics.FillRectangle(Brushes.Black, sx - 10, sy - 10, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx - 8, sy - 8, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx + sw / 2 - 5, sy - 10, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx + sw / 2 - 3, sy - 8, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx + sw, sy + sh, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx + sw + 2, sy + sh + 2, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx + sw, sy + sh / 2 - 5, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx + sw + 2, sy + sh / 2 - 3, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx + sw, sy - 10, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx + sw + 2, sy - 8, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx + sw / 2 - 5, sy + sh, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx + sw / 2 - 3, sy + sh + 2, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx - 10, sy + sh, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx - 8, sy + sh + 2, 6, 6);
                 e.Graphics.FillRectangle(Brushes.Black, sx - 10, sy + sh / 2 - 5, 10, 10);
+                e.Graphics.FillRectangle(Brushes.White, sx - 8, sy + sh / 2 - 3, 6, 6);
             }
         }
 

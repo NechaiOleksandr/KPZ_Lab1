@@ -36,6 +36,11 @@ namespace BlockDiagramEditor.Services
             return (y - CanvasOffset.Y) / Scale;
         }
 
+        public PointF STCP(PointF point)
+        {
+            return new PointF((point.X - CanvasOffset.X) / Scale, (point.Y - CanvasOffset.Y) / Scale);
+        }
+
         public float CTSX(float x) //CanvasToScreenX
         {
             return x * Scale + CanvasOffset.X;
@@ -45,6 +50,12 @@ namespace BlockDiagramEditor.Services
         {
             return y * Scale + CanvasOffset.Y;
         }
+
+        public PointF CTSP(PointF point)
+        {
+            return new PointF(point.X * Scale + CanvasOffset.X, point.Y * Scale + CanvasOffset.Y);
+        }
+
         public float CTSS(float s) // ScrenToCanvasSize
         {
             return s * Scale;
