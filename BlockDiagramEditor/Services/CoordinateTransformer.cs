@@ -26,12 +26,12 @@ namespace BlockDiagramEditor.Services
             }
         }
 
-        public float STCX(float x) //ScreenToCanvasX
+        public float STCX(float x)
         {
             return (x - CanvasOffset.X) / Scale;
         }
 
-        public float STCY(float y) //ScreenToCanvasY
+        public float STCY(float y)
         {
             return (y - CanvasOffset.Y) / Scale;
         }
@@ -41,12 +41,12 @@ namespace BlockDiagramEditor.Services
             return new PointF((point.X - CanvasOffset.X) / Scale, (point.Y - CanvasOffset.Y) / Scale);
         }
 
-        public float CTSX(float x) //CanvasToScreenX
+        public float CTSX(float x)
         {
             return x * Scale + CanvasOffset.X;
         }
 
-        public float CTSY(float y) //CanvasToScreenY
+        public float CTSY(float y)
         {
             return y * Scale + CanvasOffset.Y;
         }
@@ -56,7 +56,7 @@ namespace BlockDiagramEditor.Services
             return new PointF(point.X * Scale + CanvasOffset.X, point.Y * Scale + CanvasOffset.Y);
         }
 
-        public float CTSS(float s) // ScrenToCanvasSize
+        public float CTSS(float s)
         {
             return s * Scale;
         }

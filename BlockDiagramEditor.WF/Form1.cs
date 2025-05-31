@@ -182,6 +182,7 @@ namespace BlockDiagramEditor.WF
             if (ArrowManager.SelectedArrow != null) 
                 if (ArrowManager.SelectedArrow.RebuildArrow() == true) 
                     ArrowManager.Arrows.Remove(ArrowManager.SelectedArrow);
+            ArrowManager.ResizeArrowsByBracing();
         }
 
         private void panelCanvas_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -253,6 +254,25 @@ namespace BlockDiagramEditor.WF
                 ArrowManager.DeleteArrow(panelCanvas);
                 panelCanvas.Invalidate();
             }
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            ActiveControl = null;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            ActiveControl = null;
+            BlockManager.Search(textBoxSearch.Text);
+            panelCanvas.Invalidate();
+        }
+
+        private void unsetSearch_Click(object sender, EventArgs e)
+        {
+            ActiveControl = null;
+            BlockManager.UnsetSearch();
+            panelCanvas.Invalidate();
         }
     }
 }

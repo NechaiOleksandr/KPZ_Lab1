@@ -23,6 +23,7 @@ namespace BlockDiagramEditor.Models
         public Pen Border {  get; set; }
         public Brush Brush { get; set; }
         public bool IsSelected { get; set; }
+        public bool IsFound {  get; set; }
 
         public Block(float x, float y)
         {
@@ -46,6 +47,11 @@ namespace BlockDiagramEditor.Models
                 LineAlignment = StringAlignment.Center
             };
             e.Graphics.DrawString(Text, new Font(Font.FontFamily, tr.CTSS(Font.Size)), Brushes.Black, TextArea, Format);
+
+            if (IsFound)
+            {
+                e.Graphics.DrawRectangle(new Pen(Color.Green, 3), tr.CTSX(X - 5), tr.CTSY(Y - 5), tr.CTSS(Width + 10), tr.CTSS(Height + 10));
+            }
 
             if (IsSelected)
             {

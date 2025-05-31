@@ -62,12 +62,12 @@ namespace BlockDiagramEditor.Models.Arrows
                 if (Bracing[0] != (null, 0))
                 {
                     e.Graphics.FillEllipse(Brushes.Black, tr.CTSX(Points[0].X) - 5, tr.CTSY(Points[0].Y) - 5, 10, 10);
-                    e.Graphics.FillEllipse(Brushes.Green, tr.CTSX(Points[0].X) - 3, tr.CTSY(Points[0].Y) - 3, 6, 6);
+                    e.Graphics.FillEllipse(Brushes.LimeGreen, tr.CTSX(Points[0].X) - 3, tr.CTSY(Points[0].Y) - 3, 6, 6);
                 }
                 if (Bracing[1] != (null, 0))
                 {
                     e.Graphics.FillEllipse(Brushes.Black, tr.CTSX(Points.Last().X) - 5, tr.CTSY(Points.Last().Y) - 5, 10, 10);
-                    e.Graphics.FillEllipse(Brushes.Green, tr.CTSX(Points.Last().X) - 3, tr.CTSY(Points.Last().Y) - 3, 6, 6);
+                    e.Graphics.FillEllipse(Brushes.LimeGreen, tr.CTSX(Points.Last().X) - 3, tr.CTSY(Points.Last().Y) - 3, 6, 6);
                 }
             }
         }

@@ -93,37 +93,64 @@ namespace BlockDiagramEditor.Services
                 int arrowSide = handle == 0 ? 0 : 1;
                 SelectedArrow.Bracing[arrowSide] = (null, 0);
 
+                RectangleF Top;
+                RectangleF Right;
+                RectangleF Bottom;
+                RectangleF Left;
                 foreach (var block in blocks)
                 {
-                    if (block.Contains(SelectedArrow.Points[handle].X, SelectedArrow.Points[handle].Y))
+                    Top = new RectangleF(block.X + block.Width / 2 - 5, block.Y - 5, 11, 11);
+                    Bottom = new RectangleF(block.X + block.Width / 2 - 5, block.Y + block.Height - 5, 11, 11);
+                    if (block.Type != "RectangleBlock")
                     {
-                        if (SelectedArrow.Points[handle].X == block.X + block.Width / 2)
-                        {
-                            if (SelectedArrow.Points[handle].Y == block.Y)
-                            {
-                                SelectedArrow.Bracing[arrowSide] = (block, 1);
-                                break;
-                            }
-                            else if (SelectedArrow.Points[handle].Y == block.Y + block.Height)
-                            {
-                                SelectedArrow.Bracing[arrowSide] = (block, 3);
-                                break;
-                            }
-                        }
-                        else if (SelectedArrow.Points[handle].Y == block.Y + block.Height / 2)
-                        {
-                            if (SelectedArrow.Points[handle].X == block.X)
-                            {
-                                SelectedArrow.Bracing[arrowSide] = (block, 4);
-                                break;
-                            }
-                            else if (SelectedArrow.Points[handle].X == block.X + block.Width)
-                            {
-                                SelectedArrow.Bracing[arrowSide] = (block, 2);
-                                break;
-                            }
-                        }
+                        Left = new RectangleF(block.X - 5, block.Y + block.Height / 2 - 5, 11, 11);
+                        Right = new RectangleF(block.X + block.Width - 5, block.Y + block.Height / 2 - 5, 11, 11);
                     }
+                    else
+                    {
+                        Left = new RectangleF(block.X + block.Width / 16 - 5, block.Y + block.Height / 2 - 5, 11, 11);
+                        Right = new RectangleF(block.X + block.Width - block.Width / 16 - 5, block.Y + block.Height / 2 - 5, 11, 11);
+                    }
+
+                    if (Top.Contains(SelectedArrow.Points[handle]))
+                        SelectedArrow.Bracing[arrowSide] = (block, 1);
+                    else if (Right.Contains(SelectedArrow.Points[handle]))
+                        SelectedArrow.Bracing[arrowSide] = (block, 2);
+                    else if (Bottom.Contains(SelectedArrow.Points[handle]))
+                        SelectedArrow.Bracing[arrowSide] = (block, 3);
+                    else if (Left.Contains(SelectedArrow.Points[handle]))
+                        SelectedArrow.Bracing[arrowSide] = (block, 4);
+
+                    
+                    //if (block.Contains(SelectedArrow.Points[handle].X, SelectedArrow.Points[handle].Y))
+                    //{
+                    //    if (SelectedArrow.Points[handle].X == block.X + block.Width / 2)
+                    //    {
+                    //        if (SelectedArrow.Points[handle].Y == block.Y)
+                    //        {
+                    //            SelectedArrow.Bracing[arrowSide] = (block, 1);
+                    //            break;
+                    //        }
+                    //        else if (SelectedArrow.Points[handle].Y == block.Y + block.Height)
+                    //        {
+                    //            SelectedArrow.Bracing[arrowSide] = (block, 3);
+                    //            break;
+                    //        }
+                    //    }
+                    //    else if (SelectedArrow.Points[handle].Y == block.Y + block.Height / 2)
+                    //    {
+                            //if (SelectedArrow.Points[handle].X == block.X || (SelectedArrow.Points[handle].X == block.X + block.Width / 16 && block.Type == "ParalelogramBlock"))
+                    //        {
+                    //            SelectedArrow.Bracing[arrowSide] = (block, 4);
+                    //            break;
+                    //        }
+                    //        else if (SelectedArrow.Points[handle].X == block.X + block.Width || (SelectedArrow.Points[handle].X == block.X + block.Width - block.Width / 16 && block.Type == "ParalelogramBlock"))
+                    //        {
+                    //            SelectedArrow.Bracing[arrowSide] = (block, 2);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
                 }
             }
             else if (handle == -1)
@@ -137,61 +164,58 @@ namespace BlockDiagramEditor.Services
         {
             foreach (var arrow in Arrows)
             {
-                if (arrow.Bracing[0] != (null, 0))
+                for (int i = 0; i < 2; i++)
                 {
-                    if (arrow.Bracing[0].Side == 1)
+                    if (arrow.Bracing[i] == (null, 0)) continue;
+
+                    int pointIndex = i == 0 ? 0 : arrow.Points.Count - 1;
+                    PointF newPoint;
+                    switch (arrow.Bracing[i].Side)
                     {
-                        arrow.Points[0] = new PointF(
-                            arrow.Bracing[0].Block.X + arrow.Bracing[0].Block.Width / 2,
-                            arrow.Bracing[0].Block.Y);
+                        case 1:
+                            newPoint = new PointF(
+                                arrow.Bracing[i].Block.X + arrow.Bracing[i].Block.Width / 2,
+                                arrow.Bracing[i].Block.Y);
+                            break;
+                        case 2:
+                            if (arrow.Bracing[i].Block.Type != "ParalelogramBlock")
+                            {
+                                newPoint = new PointF(
+                                    arrow.Bracing[i].Block.X + arrow.Bracing[i].Block.Width,
+                                    arrow.Bracing[i].Block.Y + arrow.Bracing[i].Block.Height / 2);
+                            }
+                            else
+                            {
+                                newPoint = new PointF(
+                                    arrow.Bracing[i].Block.X + arrow.Bracing[i].Block.Width - arrow.Bracing[i].Block.Width / 16,
+                                    arrow.Bracing[i].Block.Y + arrow.Bracing[i].Block.Height / 2);
+                            }
+                            break;
+                        case 3:
+                            newPoint = new PointF(
+                                arrow.Bracing[i].Block.X + arrow.Bracing[i].Block.Width / 2,
+                                arrow.Bracing[i].Block.Y + arrow.Bracing[i].Block.Height);
+                            break;
+                        case 4:
+                            if (arrow.Bracing[i].Block.Type != "ParalelogramBlock")
+                            {
+                                newPoint = new PointF(
+                                arrow.Bracing[i].Block.X,
+                                arrow.Bracing[i].Block.Y + arrow.Bracing[i].Block.Height / 2);
+                            } else
+                            {
+                                newPoint = new PointF(
+                                    arrow.Bracing[i].Block.X + arrow.Bracing[i].Block.Width / 16,
+                                    arrow.Bracing[i].Block.Y + arrow.Bracing[i].Block.Height / 2);
+                            }
+                            break;
+                        default:
+                            continue;
                     }
-                    else if (arrow.Bracing[0].Side == 2)
-                    {
-                        arrow.Points[0] = new PointF(
-                            arrow.Bracing[0].Block.X + arrow.Bracing[0].Block.Width,
-                            arrow.Bracing[0].Block.Y + arrow.Bracing[0].Block.Height / 2);
-                    }
-                    else if (arrow.Bracing[0].Side == 3)
-                    {
-                        arrow.Points[0] = new PointF(
-                            arrow.Bracing[0].Block.X + arrow.Bracing[0].Block.Width / 2,
-                            arrow.Bracing[0].Block.Y + arrow.Bracing[0].Block.Height);
-                    }
-                    else if (arrow.Bracing[0].Side == 4)
-                    {
-                        arrow.Points[0] = new PointF(
-                            arrow.Bracing[0].Block.X,
-                            arrow.Bracing[0].Block.Y + arrow.Bracing[0].Block.Height / 2);
-                    }
-                }
-                if (arrow.Bracing[1] != (null, 0))
-                {
-                    if (arrow.Bracing[1].Side == 1)
-                    {
-                        arrow.Points[arrow.Points.Count - 1] = new PointF(
-                            arrow.Bracing[1].Block.X + arrow.Bracing[1].Block.Width / 2,
-                            arrow.Bracing[1].Block.Y);
-                    }
-                    else if (arrow.Bracing[1].Side == 2)
-                    {
-                        arrow.Points[arrow.Points.Count - 1] = new PointF(
-                            arrow.Bracing[1].Block.X + arrow.Bracing[1].Block.Width,
-                            arrow.Bracing[1].Block.Y + arrow.Bracing[1].Block.Height / 2);
-                    }
-                    else if (arrow.Bracing[1].Side == 3)
-                    {
-                        arrow.Points[arrow.Points.Count - 1] = new PointF(
-                            arrow.Bracing[1].Block.X + arrow.Bracing[1].Block.Width / 2,
-                            arrow.Bracing[1].Block.Y + arrow.Bracing[1].Block.Height);
-                    }
-                    else if (arrow.Bracing[1].Side == 4)
-                    {
-                        arrow.Points[arrow.Points.Count - 1] = new PointF(
-                            arrow.Bracing[1].Block.X,
-                            arrow.Bracing[1].Block.Y + arrow.Bracing[1].Block.Height / 2);
-                    }
+                    arrow.Points[pointIndex] = newPoint;
                 }
             }
         }
+
     }
 }

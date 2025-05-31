@@ -183,5 +183,26 @@ namespace BlockDiagramEditor.Services
                     break;
             }
         }
+
+        public void Search(string str)
+        {
+            foreach (var block in Blocks)
+            {
+                if (!string.IsNullOrEmpty(block.Text) && !string.IsNullOrWhiteSpace(str) && block.Text.IndexOf(str, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    block.IsFound = true;
+                }
+                else
+                {
+                    block.IsFound = false;
+                }
+            }
+        }
+
+        public void UnsetSearch()
+        {
+            foreach (var block in Blocks)
+                block.IsFound = false;
+        }
     }
 }
