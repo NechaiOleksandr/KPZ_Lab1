@@ -22,7 +22,7 @@ namespace BlockDiagramEditor.Models
             float sw = tr.CTSS(Width);
             float sh = tr.CTSS(Height);
 
-            e.Graphics.FillRectangle(Brushes.White,sx, sy, sw, sh);
+            e.Graphics.FillRectangle(Brush, sx, sy, sw, sh);
             e.Graphics.DrawRectangle(new Pen(Border.Color, tr.CTSS(Border.Width)), sx, sy, sw, sh);
             base.Draw(e, tr);
         }

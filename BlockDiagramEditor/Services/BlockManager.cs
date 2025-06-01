@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BlockDiagramEditor.Models;
+using BlockDiagramEditor.Models.Arrows;
 
 namespace BlockDiagramEditor.Services
 {
@@ -52,6 +53,11 @@ namespace BlockDiagramEditor.Services
                 case 4: newBlock = new DiamondBlock(X, Y); break;
                 case 5: newBlock = new HexagonBlock(X, Y); break;
                 case 6: newBlock = new EllipseBlock(X, Y); break;
+                case 7:
+                    X = (Tr.STCX(x) - 10) - (Tr.STCX(x) - 10) % 10;
+                    Y = (Tr.STCY(y) - 10) - (Tr.STCY(y) - 10) % 10;
+                    newBlock = new TextBlock(X, Y); 
+                    break;
             }
             if (newBlock != null)
             {
@@ -59,11 +65,20 @@ namespace BlockDiagramEditor.Services
             }
         }
 
-        public void DeleteBlock(Control canvas)
+        public void DeleteBlock(Control canvas, List<Arrow> arrows)
         {
-            Blocks.RemoveAll(block => block.IsSelected == true);
+            if (arrows != null)
+            {
+                foreach (Arrow arrow in arrows)
+                {
+                    if (arrow.Bracing[0].Block == SelectedBlock)
+                        arrow.Bracing[0] = (null, 0);
+                    if (arrow.Bracing[1].Block == SelectedBlock)
+                        arrow.Bracing[1] = (null, 0);
+                }
+            }
+            Blocks.Remove(SelectedBlock);
             SelectedBlock = null;
-
             if (EditText != null)
             {
                 canvas.Controls.Remove(EditText);
@@ -87,17 +102,28 @@ namespace BlockDiagramEditor.Services
             {
                 EditText = new TextBox()
                 {
-                    Location = new Point((int)Tr.CTSX(EditingBlock.X + 5), (int)Tr.CTSY(EditingBlock.Y + 5)),
-                    Size = new Size((int)Tr.CTSS(EditingBlock.Width - 10), (int)Tr.CTSS(EditingBlock.Height - 10)),
+                    Location = EditingBlock is TextBlock ?
+                    new Point((int)Tr.CTSX(EditingBlock.X), (int)Tr.CTSY(EditingBlock.Y)) :
+                    new Point((int)Tr.CTSX(EditingBlock.X + 5), (int)Tr.CTSY(EditingBlock.Y + 5)),
+
+                    Size = EditingBlock is TextBlock ?
+                    new Size((int)Tr.CTSS(EditingBlock.Width), (int)Tr.CTSS(EditingBlock.Height)) :
+                    new Size((int)Tr.CTSS(EditingBlock.Width - 10), (int)Tr.CTSS(EditingBlock.Height - 10)),
+
+                    BackColor = EditingBlock is TextBlock ?
+                    Color.DarkGray : 
+                    Color.White,
+
                     Text = EditingBlock.Text,
                     Multiline = true,
                     Font = new Font(EditingBlock.Font.FontFamily, (int)Tr.CTSS(EditingBlock.Font.Size)),
-                    TextAlign = HorizontalAlignment.Center,
+
+                    TextAlign = EditingBlock is TextBlock ? 
+                    HorizontalAlignment.Left :
+                    HorizontalAlignment.Center,
                     BorderStyle = BorderStyle.None,
                 };
                 canvas.Controls.Add(EditText);
-                EditText.Focus();
-                EditText.SelectAll();
             }
         }
 
@@ -107,13 +133,25 @@ namespace BlockDiagramEditor.Services
             {
                 EditingBlock.Text = EditText.Text;
                 canvas.Controls.Remove(EditText);
-                EditingBlock = null;
                 EditText = null;
+
+                if (EditingBlock is TextBlock textBlock)
+                {
+                    textBlock.ResizeByText();
+                    if (string.IsNullOrWhiteSpace(textBlock.Text))
+                    {
+                        Blocks.Remove(textBlock);
+                    }
+                }
+                
+                EditingBlock = null;
             }
         }
 
         public void ResizeSelectedBlock(ResizeHandle handle, float canvasX, float canvasY)
         {
+            if (SelectedBlock.Type == "TextBlock") return;
+
             switch (handle)
             {
                 case ResizeHandle.BottomRight:

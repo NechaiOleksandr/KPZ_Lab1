@@ -13,7 +13,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace BlockDiagramEditor.Models.Arrows
 {
-    public class Arrow
+    public abstract class Arrow
     {
         public string Type => GetType().Name;
         public List<PointF> Points;
@@ -44,8 +44,6 @@ namespace BlockDiagramEditor.Models.Arrows
             {
                 e.Graphics.DrawLine(sPen, tr.CTSP(Points[i]), tr.CTSP(Points[i + 1]));
             }
-            PointF[] head = CalculateHead(tr.CTSP(Points[Points.Count - 2]), tr.CTSP(Points[Points.Count - 1]), tr);
-            e.Graphics.DrawLines(new Pen(Pen.Color, tr.CTSS(Pen.Width)), head);
 
             if (IsSelected)
             {
@@ -71,11 +69,12 @@ namespace BlockDiagramEditor.Models.Arrows
                 }
             }
         }
+
         public static PointF[] CalculateHead(PointF from, PointF to, CoordinateTransformer tr)
         {
             float headSize = tr.CTSS(10);
 
-            PointF v = new PointF(to.X - from.X, to.Y - from.Y);     
+            PointF v = new PointF(to.X - from.X, to.Y - from.Y);
 
             float l = (float)Math.Sqrt(v.X * v.X + v.Y * v.Y);
             if (l > 0)

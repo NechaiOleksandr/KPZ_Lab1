@@ -63,16 +63,6 @@ namespace BlockDiagramEditor.WF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow {
-            get {
-                object obj = ResourceManager.GetObject("Arrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Diamond {
             get {
                 object obj = ResourceManager.GetObject("Diamond", resourceCulture);
@@ -86,6 +76,26 @@ namespace BlockDiagramEditor.WF.Properties {
         internal static System.Drawing.Bitmap Ellipse {
             get {
                 object obj = ResourceManager.GetObject("Ellipse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EmptyTrArrow {
+            get {
+                object obj = ResourceManager.GetObject("EmptyTrArrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FilledTrArrow {
+            get {
+                object obj = ResourceManager.GetObject("FilledTrArrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +146,16 @@ namespace BlockDiagramEditor.WF.Properties {
         internal static System.Drawing.Bitmap Terminator {
             get {
                 object obj = ResourceManager.GetObject("Terminator", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TwoHeadedArrow {
+            get {
+                object obj = ResourceManager.GetObject("TwoHeadedArrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

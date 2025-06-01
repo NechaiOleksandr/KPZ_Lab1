@@ -31,7 +31,7 @@ namespace BlockDiagramEditor.Models
             };
             path.AddLines(points);
             path.CloseFigure();
-            e.Graphics.FillPath(Brushes.White, path);
+            e.Graphics.FillPath(Brush, path);
             e.Graphics.DrawPath(new Pen(Border.Color, tr.CTSS(Border.Width)), path);
             base.Draw(e, tr);
         }

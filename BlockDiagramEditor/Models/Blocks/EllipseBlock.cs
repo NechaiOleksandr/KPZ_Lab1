@@ -21,7 +21,7 @@ namespace BlockDiagramEditor.Models
             float sh = tr.CTSS(Height);
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            e.Graphics.FillEllipse(Brushes.White, sx, sy, sw, sh);
+            e.Graphics.FillEllipse(Brush, sx, sy, sw, sh);
             e.Graphics.DrawEllipse(new Pen(Border.Color, tr.CTSS(Border.Width)), sx, sy, sw, sh);
             base.Draw(e, tr);
         }

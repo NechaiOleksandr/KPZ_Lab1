@@ -47,6 +47,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Models\Arrows\Arrow.cs" />
+    <Compile Include="Models\Arrows\ClassicArrow.cs" />
+    <Compile Include="Models\Arrows\EmptyTrArrow.cs" />
+    <Compile Include="Models\Arrows\FilledTrArrow.cs" />
+    <Compile Include="Models\Arrows\LineArrow.cs" />
+    <Compile Include="Models\Arrows\TwoHeadedArrow.cs" />
     <Compile Include="Models\Blocks\Block.cs" />
     <Compile Include="Models\Blocks\DiamondBlock.cs" />
     <Compile Include="Models\Blocks\EllipseBlock.cs" />
@@ -55,6 +60,7 @@
     <Compile Include="Models\Blocks\RectangleBlock.cs" />
     <Compile Include="Models\Blocks\ResizeHandle.cs" />
     <Compile Include="Models\Blocks\TerminatorBlock.cs" />
+    <Compile Include="Models\Blocks\TextBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ArrowManager.cs" />
     <Compile Include="Services\BlockManager.cs" />

@@ -28,7 +28,9 @@ namespace BlockDiagramEditor.Services
             {
                 LastSelectedArrow.IsSelected = false;
             }
+
             SelectedArrow = Arrows.LastOrDefault(arrow => arrow.Contains(Tr.STCX(x), Tr.STCY(y)));
+
             if (SelectedArrow != null)
             {
                 SelectedArrow.IsSelected = true;
@@ -67,7 +69,11 @@ namespace BlockDiagramEditor.Services
             Arrow newArrow = null;
             switch (model)
             {
-                case 1: newArrow = new Arrow(X, Y); break;
+                case 1: newArrow = new ClassicArrow(X, Y); break;
+                case 2: newArrow = new EmptyTrArrow(X, Y); break;
+                case 3: newArrow = new FilledTrArrow(X, Y); break;
+                case 4: newArrow = new LineArrow(X, Y); break;
+                    case 5: newArrow = new TwoHeadedArrow(X, Y); break;
             }
             if (newArrow != null)
             {
@@ -101,7 +107,7 @@ namespace BlockDiagramEditor.Services
                 {
                     Top = new RectangleF(block.X + block.Width / 2 - 5, block.Y - 5, 11, 11);
                     Bottom = new RectangleF(block.X + block.Width / 2 - 5, block.Y + block.Height - 5, 11, 11);
-                    if (block.Type != "RectangleBlock")
+                    if (block.Type != "ParalelogramBlock")
                     {
                         Left = new RectangleF(block.X - 5, block.Y + block.Height / 2 - 5, 11, 11);
                         Right = new RectangleF(block.X + block.Width - 5, block.Y + block.Height / 2 - 5, 11, 11);
@@ -120,37 +126,6 @@ namespace BlockDiagramEditor.Services
                         SelectedArrow.Bracing[arrowSide] = (block, 3);
                     else if (Left.Contains(SelectedArrow.Points[handle]))
                         SelectedArrow.Bracing[arrowSide] = (block, 4);
-
-                    
-                    //if (block.Contains(SelectedArrow.Points[handle].X, SelectedArrow.Points[handle].Y))
-                    //{
-                    //    if (SelectedArrow.Points[handle].X == block.X + block.Width / 2)
-                    //    {
-                    //        if (SelectedArrow.Points[handle].Y == block.Y)
-                    //        {
-                    //            SelectedArrow.Bracing[arrowSide] = (block, 1);
-                    //            break;
-                    //        }
-                    //        else if (SelectedArrow.Points[handle].Y == block.Y + block.Height)
-                    //        {
-                    //            SelectedArrow.Bracing[arrowSide] = (block, 3);
-                    //            break;
-                    //        }
-                    //    }
-                    //    else if (SelectedArrow.Points[handle].Y == block.Y + block.Height / 2)
-                    //    {
-                            //if (SelectedArrow.Points[handle].X == block.X || (SelectedArrow.Points[handle].X == block.X + block.Width / 16 && block.Type == "ParalelogramBlock"))
-                    //        {
-                    //            SelectedArrow.Bracing[arrowSide] = (block, 4);
-                    //            break;
-                    //        }
-                    //        else if (SelectedArrow.Points[handle].X == block.X + block.Width || (SelectedArrow.Points[handle].X == block.X + block.Width - block.Width / 16 && block.Type == "ParalelogramBlock"))
-                    //        {
-                    //            SelectedArrow.Bracing[arrowSide] = (block, 2);
-                    //            break;
-                    //        }
-                    //    }
-                    //}
                 }
             }
             else if (handle == -1)
