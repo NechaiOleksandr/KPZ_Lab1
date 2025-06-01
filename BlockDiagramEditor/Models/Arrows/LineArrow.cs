@@ -12,6 +12,7 @@ namespace BlockDiagramEditor.Models.Arrows
 {
     public class LineArrow : Arrow
     {
+        public LineArrow() : base() { }
         public LineArrow(float x, float y) : base(x, y) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)

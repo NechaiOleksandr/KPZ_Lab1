@@ -13,13 +13,14 @@ namespace BlockDiagramEditor.Services
 {
     public class ArrowManager
     {
-        public List<Arrow> Arrows { get; private set; } = new List<Arrow>();
+        public List<Arrow> Arrows { get; private set; }
         public Arrow SelectedArrow { get; set; }
         public Arrow LastSelectedArrow { get; set; }
         public CoordinateTransformer Tr { get; set; }
         public ArrowManager(CoordinateTransformer transformer)
         {
             Tr = transformer;
+            Arrows = new List<Arrow>();
         }
 
         public void SelectArrow(int x, int y)
@@ -93,16 +94,16 @@ namespace BlockDiagramEditor.Services
 
         public void Connect(List<Block> blocks, int handle)
         {
-            if (handle == 0 || handle == SelectedArrow.Points.Count - 1)
+            if (SelectedArrow == null) return;
+
+            if (handle == 0 || (SelectedArrow.Points.Any() && handle == SelectedArrow.Points.Count - 1))
             {
+                int currentArrowSideIndex = (handle == 0) ? 0 : 1;
+                SelectedArrow.Bracing[currentArrowSideIndex] = (null, 0);
 
-                int arrowSide = handle == 0 ? 0 : 1;
-                SelectedArrow.Bracing[arrowSide] = (null, 0);
+                PointF pointToConnect = SelectedArrow.Points[handle];
+                RectangleF Top, Right, Bottom, Left;
 
-                RectangleF Top;
-                RectangleF Right;
-                RectangleF Bottom;
-                RectangleF Left;
                 foreach (var block in blocks)
                 {
                     Top = new RectangleF(block.X + block.Width / 2 - 5, block.Y - 5, 11, 11);
@@ -118,20 +119,95 @@ namespace BlockDiagramEditor.Services
                         Right = new RectangleF(block.X + block.Width - block.Width / 16 - 5, block.Y + block.Height / 2 - 5, 11, 11);
                     }
 
-                    if (Top.Contains(SelectedArrow.Points[handle]))
-                        SelectedArrow.Bracing[arrowSide] = (block, 1);
-                    else if (Right.Contains(SelectedArrow.Points[handle]))
-                        SelectedArrow.Bracing[arrowSide] = (block, 2);
-                    else if (Bottom.Contains(SelectedArrow.Points[handle]))
-                        SelectedArrow.Bracing[arrowSide] = (block, 3);
-                    else if (Left.Contains(SelectedArrow.Points[handle]))
-                        SelectedArrow.Bracing[arrowSide] = (block, 4);
+                    if (Top.Contains(pointToConnect))
+                    {
+                        SelectedArrow.Bracing[currentArrowSideIndex] = (block, 1);
+                        break;
+                    }
+                    else if (Right.Contains(pointToConnect))
+                    {
+                        SelectedArrow.Bracing[currentArrowSideIndex] = (block, 2);
+                        break;
+                    }
+                    else if (Bottom.Contains(pointToConnect))
+                    {
+                        SelectedArrow.Bracing[currentArrowSideIndex] = (block, 3);
+                        break;
+                    }
+                    else if (Left.Contains(pointToConnect))
+                    {
+                        SelectedArrow.Bracing[currentArrowSideIndex] = (block, 4);
+                        break;
+                    }
                 }
             }
             else if (handle == -1)
             {
-                SelectedArrow.Bracing[0] = (null, 0);
-                SelectedArrow.Bracing[1] = (null, 0);
+                if (SelectedArrow.Bracing[0].Block != null)
+                {
+                    Block block = SelectedArrow.Bracing[0].Block;
+                    int side = SelectedArrow.Bracing[0].Side;
+                    PointF currentPoint = SelectedArrow.Points[0];
+                    bool detach = false;
+
+                    PointF expectedPoint = PointF.Empty;
+                    switch (side)
+                    {
+                        case 1: expectedPoint = new PointF(block.X + block.Width / 2, block.Y); break;
+                        case 2:
+                            expectedPoint = (block.Type != "ParalelogramBlock") ?
+                                        new PointF(block.X + block.Width, block.Y + block.Height / 2) :
+                                        new PointF(block.X + block.Width - block.Width / 16, block.Y + block.Height / 2); break;
+                        case 3: expectedPoint = new PointF(block.X + block.Width / 2, block.Y + block.Height); break;
+                        case 4:
+                            expectedPoint = (block.Type != "ParalelogramBlock") ?
+                                        new PointF(block.X, block.Y + block.Height / 2) :
+                                        new PointF(block.X + block.Width / 16, block.Y + block.Height / 2); break;
+                    }
+
+                    if (currentPoint != expectedPoint)
+                    {
+                        detach = true;
+                    }
+
+                    if (detach)
+                    {
+                        SelectedArrow.Bracing[0] = (null, 0);
+                    }
+                }
+
+                if (SelectedArrow.Bracing[1].Block != null)
+                {
+                    Block block = SelectedArrow.Bracing[1].Block;
+                    int side = SelectedArrow.Bracing[1].Side;
+                    PointF currentPoint = SelectedArrow.Points[SelectedArrow.Points.Count - 1];
+                    bool detach = false;
+
+                    PointF expectedPoint = PointF.Empty;
+                    switch (side)
+                    {
+                        case 1: expectedPoint = new PointF(block.X + block.Width / 2, block.Y); break;
+                        case 2:
+                            expectedPoint = (block.Type != "ParalelogramBlock") ?
+                                        new PointF(block.X + block.Width, block.Y + block.Height / 2) :
+                                        new PointF(block.X + block.Width - block.Width / 16, block.Y + block.Height / 2); break;
+                        case 3: expectedPoint = new PointF(block.X + block.Width / 2, block.Y + block.Height); break;
+                        case 4:
+                            expectedPoint = (block.Type != "ParalelogramBlock") ?
+                                        new PointF(block.X, block.Y + block.Height / 2) :
+                                        new PointF(block.X + block.Width / 16, block.Y + block.Height / 2); break;
+                    }
+
+                    if (currentPoint != expectedPoint)
+                    {
+                        detach = true;
+                    }
+
+                    if (detach)
+                    {
+                        SelectedArrow.Bracing[1] = (null, 0);
+                    }
+                }
             }
         }
 

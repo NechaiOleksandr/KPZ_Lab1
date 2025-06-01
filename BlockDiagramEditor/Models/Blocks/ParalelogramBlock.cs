@@ -12,7 +12,8 @@ namespace BlockDiagramEditor.Models
 {
     public class ParalelogramBlock : Block
     {
-        public ParalelogramBlock(float x, float y) : base(x, y) { }
+        public ParalelogramBlock() : base() { }
+        public ParalelogramBlock(float x, float y, int id) : base(x, y, id) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {

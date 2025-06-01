@@ -12,7 +12,9 @@ namespace BlockDiagramEditor.Models
 {
     public class HexagonBlock : Block
     {
-        public HexagonBlock(float x, float y) : base(x, y) { }
+        public HexagonBlock() : base() { }
+
+        public HexagonBlock(float x, float y, int id) : base(x, y, id) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {

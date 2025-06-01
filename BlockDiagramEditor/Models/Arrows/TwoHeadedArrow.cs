@@ -12,6 +12,7 @@ namespace BlockDiagramEditor.Models.Arrows
 {
     public class TwoHeadedArrow : Arrow
     {
+        public TwoHeadedArrow() : base() { }
         public TwoHeadedArrow(float x, float y) : base(x, y) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)

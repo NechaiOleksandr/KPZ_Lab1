@@ -12,6 +12,7 @@ namespace BlockDiagramEditor.Models.Arrows
 {
     public class FilledTrArrow : Arrow
     {
+        public FilledTrArrow() : base() { }
         public FilledTrArrow(float x, float y) : base(x, y) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)

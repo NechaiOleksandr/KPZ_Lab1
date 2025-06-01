@@ -12,7 +12,9 @@ namespace BlockDiagramEditor.Models
 {
     public class TerminatorBlock : Block
     {
-        public TerminatorBlock(float x, float y) : base(x, y) { }
+        public TerminatorBlock() : base() { }
+
+        public TerminatorBlock(float x, float y, int id) : base(x, y, id) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {

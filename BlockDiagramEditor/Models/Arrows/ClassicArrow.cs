@@ -12,6 +12,7 @@ namespace BlockDiagramEditor.Models.Arrows
 {
     public class ClassicArrow : Arrow
     {
+        public ClassicArrow() : base() { }
         public ClassicArrow(float x, float y) : base(x, y) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)

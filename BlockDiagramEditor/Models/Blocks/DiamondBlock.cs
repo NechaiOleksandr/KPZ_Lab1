@@ -12,7 +12,9 @@ namespace BlockDiagramEditor.Models
 {
     public class DiamondBlock : Block
     {
-        public DiamondBlock(float x, float y) : base(x, y) { }
+        public DiamondBlock() : base() { }
+
+        public DiamondBlock(float x, float y, int id) : base(x, y, id) { }
 
         public override void Draw(PaintEventArgs e, CoordinateTransformer tr)
         {

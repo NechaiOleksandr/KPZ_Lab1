@@ -13,15 +13,17 @@ namespace BlockDiagramEditor.Services
 {
     public class BlockManager
     {
-        public List<Block> Blocks { get; private set; } = new List<Block>();
+        public List<Block> Blocks { get; private set; }
         public Block SelectedBlock { get; set; }
         public Block LastSelectedBlock { get; set; }
         public Block EditingBlock { get; set; }
         public TextBox EditText { get; set; }
         public CoordinateTransformer Tr { get; set; }
+        public int CurrentId { get; set; } = 1;
         public BlockManager(CoordinateTransformer transformer)
         {
             Tr = transformer;
+            Blocks = new List<Block>();
         }
 
         public void SelectBlock(int x, int y)
@@ -47,18 +49,19 @@ namespace BlockDiagramEditor.Services
             Block newBlock = null;
             switch (model)
             {
-                case 1: newBlock = new TerminatorBlock(X, Y); break;
-                case 2: newBlock = new ParalelogramBlock(X, Y); break;
-                case 3: newBlock = new RectangleBlock(X, Y); break;
-                case 4: newBlock = new DiamondBlock(X, Y); break;
-                case 5: newBlock = new HexagonBlock(X, Y); break;
-                case 6: newBlock = new EllipseBlock(X, Y); break;
+                case 1: newBlock = new TerminatorBlock(X, Y, CurrentId); break;
+                case 2: newBlock = new ParalelogramBlock(X, Y, CurrentId); break;
+                case 3: newBlock = new RectangleBlock(X, Y, CurrentId); break;
+                case 4: newBlock = new DiamondBlock(X, Y, CurrentId); break;
+                case 5: newBlock = new HexagonBlock(X, Y, CurrentId); break;
+                case 6: newBlock = new EllipseBlock(X, Y, CurrentId); break;
                 case 7:
                     X = (Tr.STCX(x) - 10) - (Tr.STCX(x) - 10) % 10;
                     Y = (Tr.STCY(y) - 10) - (Tr.STCY(y) - 10) % 10;
-                    newBlock = new TextBlock(X, Y); 
+                    newBlock = new TextBlock(X, Y, CurrentId); 
                     break;
             }
+            CurrentId++;
             if (newBlock != null)
             {
                 Blocks.Add(newBlock);

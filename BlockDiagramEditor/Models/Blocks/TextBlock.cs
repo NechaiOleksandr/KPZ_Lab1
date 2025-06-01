@@ -14,7 +14,9 @@ namespace BlockDiagramEditor.Models
 {
     public class TextBlock : Block
     {
-        public TextBlock(float x, float y) : base(x, y) {
+        public TextBlock() : base() { }
+
+        public TextBlock(float x, float y, int id) : base(x, y, id) {
             Width = 70;
             Height = 30;
             Text = "Текст";
@@ -28,7 +30,7 @@ namespace BlockDiagramEditor.Models
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
             };
-            e.Graphics.DrawString(Text, new Font(Font.FontFamily, tr.CTSS(Font.Size)), Brushes.Black, TextArea, Format);
+            e.Graphics.DrawString(Text, new Font(Font.FontFamily, tr.CTSS(Font.Size)), TextColor, TextArea, Format);
 
             if (IsFound)
             {

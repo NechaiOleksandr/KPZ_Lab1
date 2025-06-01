@@ -25,19 +25,36 @@ namespace BlockDiagramEditor.Models
         public SolidBrush Brush { get; set; }
         public bool IsSelected { get; set; }
         public bool IsFound {  get; set; }
+        public int Id { get; set; }
 
-        public Block(float x, float y)
+        public Block()
+        {
+            X = 0;
+            Y = 0;
+            Width = 160;
+            Height = 80;
+            Text = string.Empty;
+            Font = new Font("Microsoft YaHei UI", 12);
+            Border = new Pen(Color.Black, 2);
+            Brush = new SolidBrush(Color.White);
+            TextColor = new SolidBrush(Color.Black);
+            IsSelected = false;
+            Id = -1;
+        }
+
+        public Block(float x, float y, int id)
         {
             X = x;
             Y = y;
             Width = 160;
             Height = 80;
             Text = string.Empty;
-            Font = new Font("consolas", 12);
+            Font = new Font("Microsoft YaHei UI", 12);
             Border = new Pen(Color.Black, 2);
             Brush = new SolidBrush(Color.White);
             TextColor = new SolidBrush(Color.Black);
             IsSelected = false;
+            Id = id;
         }
 
         public virtual void Draw(PaintEventArgs e, CoordinateTransformer tr)

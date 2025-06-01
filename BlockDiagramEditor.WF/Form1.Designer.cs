@@ -33,27 +33,30 @@
             this.showGrid = new System.Windows.Forms.CheckBox();
             this.BlocksPanel = new System.Windows.Forms.Panel();
             this.btnSelectText = new System.Windows.Forms.Button();
+            this.labelArrows = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelSearch = new System.Windows.Forms.Label();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelBlocks = new System.Windows.Forms.Label();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.btnSelectTwoHeadedArrow = new System.Windows.Forms.Button();
+            this.btnSelectLineArrow = new System.Windows.Forms.Button();
+            this.btnSelectFilledTrArrow = new System.Windows.Forms.Button();
+            this.btnSelectEmptyTrArrow = new System.Windows.Forms.Button();
+            this.btnSelectArrow = new System.Windows.Forms.Button();
             this.btnSelectTerminator = new System.Windows.Forms.Button();
             this.btnSelectParalelogram = new System.Windows.Forms.Button();
             this.btnSelectRectangle = new System.Windows.Forms.Button();
             this.btnSelectEllipse = new System.Windows.Forms.Button();
             this.btnSelectDiamond = new System.Windows.Forms.Button();
             this.btnSelectHexagon = new System.Windows.Forms.Button();
-            this.labelArrows = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSelectTwoHeadedArrow = new System.Windows.Forms.Button();
-            this.btnSelectLineArrow = new System.Windows.Forms.Button();
-            this.btnSelectFilledTrArrow = new System.Windows.Forms.Button();
-            this.btnSelectEmptyTrArrow = new System.Windows.Forms.Button();
-            this.btnSelectArrow = new System.Windows.Forms.Button();
-            this.labelSearch = new System.Windows.Forms.Label();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelBlocks = new System.Windows.Forms.Label();
             this.unsetSearch = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.lblExportImport = new System.Windows.Forms.Label();
             this.panelCanvas = new BlockDiagramEditor.Controls.BufferedPanel();
             this.panelArrowStyleEdit = new System.Windows.Forms.Panel();
             this.nudArrowWidth = new System.Windows.Forms.NumericUpDown();
@@ -68,7 +71,7 @@
             this.lblBlockFont = new System.Windows.Forms.Label();
             this.nudBlockBorderWidth = new System.Windows.Forms.NumericUpDown();
             this.lblBlockBorderWidth = new System.Windows.Forms.Label();
-            this.blbBlockBorderColor = new System.Windows.Forms.Label();
+            this.lblBlockBorderColor = new System.Windows.Forms.Label();
             this.btnBlockBorderColor = new System.Windows.Forms.Button();
             this.lblBlockColor = new System.Windows.Forms.Label();
             this.btnBLockColor = new System.Windows.Forms.Button();
@@ -164,6 +167,204 @@
             this.btnSelectText.Text = "Текст";
             this.btnSelectText.UseVisualStyleBackColor = false;
             this.btnSelectText.Click += new System.EventHandler(this.btnSelectText_Click);
+            // 
+            // labelArrows
+            // 
+            this.labelArrows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelArrows.AutoSize = true;
+            this.labelArrows.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelArrows.Location = new System.Drawing.Point(3, 337);
+            this.labelArrows.Name = "labelArrows";
+            this.labelArrows.Size = new System.Drawing.Size(58, 19);
+            this.labelArrows.TabIndex = 11;
+            this.labelArrows.Text = "Cтрілки";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.LightGray;
+            this.panel1.Controls.Add(this.btnSelectTwoHeadedArrow);
+            this.panel1.Controls.Add(this.btnSelectLineArrow);
+            this.panel1.Controls.Add(this.btnSelectFilledTrArrow);
+            this.panel1.Controls.Add(this.btnSelectEmptyTrArrow);
+            this.panel1.Controls.Add(this.btnSelectArrow);
+            this.panel1.Location = new System.Drawing.Point(3, 359);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(167, 311);
+            this.panel1.TabIndex = 10;
+            // 
+            // labelSearch
+            // 
+            this.labelSearch.AutoSize = true;
+            this.labelSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSearch.Location = new System.Drawing.Point(187, 8);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(55, 19);
+            this.labelSearch.TabIndex = 12;
+            this.labelSearch.Text = "Пошук:";
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSearch.Location = new System.Drawing.Point(245, 7);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(263, 24);
+            this.textBoxSearch.TabIndex = 13;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelArrows, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.BlocksPanel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelBlocks, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 7);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(173, 673);
+            this.tableLayoutPanel1.TabIndex = 15;
+            // 
+            // labelBlocks
+            // 
+            this.labelBlocks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelBlocks.AutoSize = true;
+            this.labelBlocks.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelBlocks.Location = new System.Drawing.Point(3, 1);
+            this.labelBlocks.Name = "labelBlocks";
+            this.labelBlocks.Size = new System.Drawing.Size(48, 19);
+            this.labelBlocks.TabIndex = 12;
+            this.labelBlocks.Text = "Блоки";
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.BackColor = System.Drawing.Color.White;
+            this.btnExport.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Export;
+            this.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExport.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Location = new System.Drawing.Point(1165, 8);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(25, 25);
+            this.btnExport.TabIndex = 17;
+            this.btnExport.TabStop = false;
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnImport
+            // 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImport.BackColor = System.Drawing.Color.White;
+            this.btnImport.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.Import;
+            this.btnImport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnImport.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnImport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.Location = new System.Drawing.Point(1196, 8);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(25, 25);
+            this.btnImport.TabIndex = 16;
+            this.btnImport.TabStop = false;
+            this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // btnSelectTwoHeadedArrow
+            // 
+            this.btnSelectTwoHeadedArrow.BackColor = System.Drawing.Color.White;
+            this.btnSelectTwoHeadedArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.TwoHeadedArrow;
+            this.btnSelectTwoHeadedArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectTwoHeadedArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectTwoHeadedArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectTwoHeadedArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectTwoHeadedArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectTwoHeadedArrow.Location = new System.Drawing.Point(8, 287);
+            this.btnSelectTwoHeadedArrow.Name = "btnSelectTwoHeadedArrow";
+            this.btnSelectTwoHeadedArrow.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectTwoHeadedArrow.TabIndex = 17;
+            this.btnSelectTwoHeadedArrow.TabStop = false;
+            this.btnSelectTwoHeadedArrow.UseVisualStyleBackColor = false;
+            this.btnSelectTwoHeadedArrow.Click += new System.EventHandler(this.btnSelectTwoHeadedArrow_Click);
+            // 
+            // btnSelectLineArrow
+            // 
+            this.btnSelectLineArrow.BackColor = System.Drawing.Color.White;
+            this.btnSelectLineArrow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectLineArrow.BackgroundImage")));
+            this.btnSelectLineArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectLineArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectLineArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectLineArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectLineArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectLineArrow.Location = new System.Drawing.Point(8, 216);
+            this.btnSelectLineArrow.Name = "btnSelectLineArrow";
+            this.btnSelectLineArrow.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectLineArrow.TabIndex = 16;
+            this.btnSelectLineArrow.TabStop = false;
+            this.btnSelectLineArrow.UseVisualStyleBackColor = false;
+            this.btnSelectLineArrow.Click += new System.EventHandler(this.btnSelectLineArrow_Click);
+            // 
+            // btnSelectFilledTrArrow
+            // 
+            this.btnSelectFilledTrArrow.BackColor = System.Drawing.Color.White;
+            this.btnSelectFilledTrArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.FilledTrArrow;
+            this.btnSelectFilledTrArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectFilledTrArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectFilledTrArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectFilledTrArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectFilledTrArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectFilledTrArrow.Location = new System.Drawing.Point(8, 145);
+            this.btnSelectFilledTrArrow.Name = "btnSelectFilledTrArrow";
+            this.btnSelectFilledTrArrow.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectFilledTrArrow.TabIndex = 15;
+            this.btnSelectFilledTrArrow.TabStop = false;
+            this.btnSelectFilledTrArrow.UseVisualStyleBackColor = false;
+            this.btnSelectFilledTrArrow.Click += new System.EventHandler(this.btnSelectFilledTrArrow_Click);
+            // 
+            // btnSelectEmptyTrArrow
+            // 
+            this.btnSelectEmptyTrArrow.BackColor = System.Drawing.Color.White;
+            this.btnSelectEmptyTrArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.EmptyTrArrow;
+            this.btnSelectEmptyTrArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectEmptyTrArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectEmptyTrArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectEmptyTrArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectEmptyTrArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectEmptyTrArrow.Location = new System.Drawing.Point(8, 74);
+            this.btnSelectEmptyTrArrow.Name = "btnSelectEmptyTrArrow";
+            this.btnSelectEmptyTrArrow.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectEmptyTrArrow.TabIndex = 14;
+            this.btnSelectEmptyTrArrow.TabStop = false;
+            this.btnSelectEmptyTrArrow.UseVisualStyleBackColor = false;
+            this.btnSelectEmptyTrArrow.Click += new System.EventHandler(this.btnSelectEmptyTrArrow_Click);
+            // 
+            // btnSelectArrow
+            // 
+            this.btnSelectArrow.BackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectArrow.BackgroundImage")));
+            this.btnSelectArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSelectArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnSelectArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelectArrow.Location = new System.Drawing.Point(8, 3);
+            this.btnSelectArrow.Name = "btnSelectArrow";
+            this.btnSelectArrow.Size = new System.Drawing.Size(130, 65);
+            this.btnSelectArrow.TabIndex = 13;
+            this.btnSelectArrow.TabStop = false;
+            this.btnSelectArrow.UseVisualStyleBackColor = false;
+            this.btnSelectArrow.Click += new System.EventHandler(this.btnSelectClasicArrow_Click);
             // 
             // btnSelectTerminator
             // 
@@ -267,168 +468,6 @@
             this.btnSelectHexagon.UseVisualStyleBackColor = false;
             this.btnSelectHexagon.Click += new System.EventHandler(this.btnSelectHexagon_Click);
             // 
-            // labelArrows
-            // 
-            this.labelArrows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelArrows.AutoSize = true;
-            this.labelArrows.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelArrows.Location = new System.Drawing.Point(3, 337);
-            this.labelArrows.Name = "labelArrows";
-            this.labelArrows.Size = new System.Drawing.Size(58, 19);
-            this.labelArrows.TabIndex = 11;
-            this.labelArrows.Text = "Cтрілки";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.Color.LightGray;
-            this.panel1.Controls.Add(this.btnSelectTwoHeadedArrow);
-            this.panel1.Controls.Add(this.btnSelectLineArrow);
-            this.panel1.Controls.Add(this.btnSelectFilledTrArrow);
-            this.panel1.Controls.Add(this.btnSelectEmptyTrArrow);
-            this.panel1.Controls.Add(this.btnSelectArrow);
-            this.panel1.Location = new System.Drawing.Point(3, 359);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(167, 311);
-            this.panel1.TabIndex = 10;
-            // 
-            // btnSelectTwoHeadedArrow
-            // 
-            this.btnSelectTwoHeadedArrow.BackColor = System.Drawing.Color.White;
-            this.btnSelectTwoHeadedArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.TwoHeadedArrow;
-            this.btnSelectTwoHeadedArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSelectTwoHeadedArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectTwoHeadedArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectTwoHeadedArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectTwoHeadedArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectTwoHeadedArrow.Location = new System.Drawing.Point(8, 287);
-            this.btnSelectTwoHeadedArrow.Name = "btnSelectTwoHeadedArrow";
-            this.btnSelectTwoHeadedArrow.Size = new System.Drawing.Size(130, 65);
-            this.btnSelectTwoHeadedArrow.TabIndex = 17;
-            this.btnSelectTwoHeadedArrow.TabStop = false;
-            this.btnSelectTwoHeadedArrow.UseVisualStyleBackColor = false;
-            this.btnSelectTwoHeadedArrow.Click += new System.EventHandler(this.btnSelectTwoHeadedArrow_Click);
-            // 
-            // btnSelectLineArrow
-            // 
-            this.btnSelectLineArrow.BackColor = System.Drawing.Color.White;
-            this.btnSelectLineArrow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectLineArrow.BackgroundImage")));
-            this.btnSelectLineArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSelectLineArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectLineArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectLineArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectLineArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectLineArrow.Location = new System.Drawing.Point(8, 216);
-            this.btnSelectLineArrow.Name = "btnSelectLineArrow";
-            this.btnSelectLineArrow.Size = new System.Drawing.Size(130, 65);
-            this.btnSelectLineArrow.TabIndex = 16;
-            this.btnSelectLineArrow.TabStop = false;
-            this.btnSelectLineArrow.UseVisualStyleBackColor = false;
-            this.btnSelectLineArrow.Click += new System.EventHandler(this.btnSelectLineArrow_Click);
-            // 
-            // btnSelectFilledTrArrow
-            // 
-            this.btnSelectFilledTrArrow.BackColor = System.Drawing.Color.White;
-            this.btnSelectFilledTrArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.FilledTrArrow;
-            this.btnSelectFilledTrArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSelectFilledTrArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectFilledTrArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectFilledTrArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectFilledTrArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFilledTrArrow.Location = new System.Drawing.Point(8, 145);
-            this.btnSelectFilledTrArrow.Name = "btnSelectFilledTrArrow";
-            this.btnSelectFilledTrArrow.Size = new System.Drawing.Size(130, 65);
-            this.btnSelectFilledTrArrow.TabIndex = 15;
-            this.btnSelectFilledTrArrow.TabStop = false;
-            this.btnSelectFilledTrArrow.UseVisualStyleBackColor = false;
-            this.btnSelectFilledTrArrow.Click += new System.EventHandler(this.btnSelectFilledTrArrow_Click);
-            // 
-            // btnSelectEmptyTrArrow
-            // 
-            this.btnSelectEmptyTrArrow.BackColor = System.Drawing.Color.White;
-            this.btnSelectEmptyTrArrow.BackgroundImage = global::BlockDiagramEditor.WF.Properties.Resources.EmptyTrArrow;
-            this.btnSelectEmptyTrArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSelectEmptyTrArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectEmptyTrArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectEmptyTrArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectEmptyTrArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectEmptyTrArrow.Location = new System.Drawing.Point(8, 74);
-            this.btnSelectEmptyTrArrow.Name = "btnSelectEmptyTrArrow";
-            this.btnSelectEmptyTrArrow.Size = new System.Drawing.Size(130, 65);
-            this.btnSelectEmptyTrArrow.TabIndex = 14;
-            this.btnSelectEmptyTrArrow.TabStop = false;
-            this.btnSelectEmptyTrArrow.UseVisualStyleBackColor = false;
-            this.btnSelectEmptyTrArrow.Click += new System.EventHandler(this.btnSelectEmptyTrArrow_Click);
-            // 
-            // btnSelectArrow
-            // 
-            this.btnSelectArrow.BackColor = System.Drawing.Color.White;
-            this.btnSelectArrow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectArrow.BackgroundImage")));
-            this.btnSelectArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSelectArrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-            this.btnSelectArrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSelectArrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnSelectArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectArrow.Location = new System.Drawing.Point(8, 3);
-            this.btnSelectArrow.Name = "btnSelectArrow";
-            this.btnSelectArrow.Size = new System.Drawing.Size(130, 65);
-            this.btnSelectArrow.TabIndex = 13;
-            this.btnSelectArrow.TabStop = false;
-            this.btnSelectArrow.UseVisualStyleBackColor = false;
-            this.btnSelectArrow.Click += new System.EventHandler(this.btnSelectClasicArrow_Click);
-            // 
-            // labelSearch
-            // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSearch.Location = new System.Drawing.Point(187, 8);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(55, 19);
-            this.labelSearch.TabIndex = 12;
-            this.labelSearch.Text = "Пошук:";
-            // 
-            // textBoxSearch
-            // 
-            this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSearch.Location = new System.Drawing.Point(245, 7);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(263, 24);
-            this.textBoxSearch.TabIndex = 13;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.labelArrows, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.BlocksPanel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelBlocks, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 7);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(173, 673);
-            this.tableLayoutPanel1.TabIndex = 15;
-            // 
-            // labelBlocks
-            // 
-            this.labelBlocks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelBlocks.AutoSize = true;
-            this.labelBlocks.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelBlocks.Location = new System.Drawing.Point(3, 1);
-            this.labelBlocks.Name = "labelBlocks";
-            this.labelBlocks.Size = new System.Drawing.Size(48, 19);
-            this.labelBlocks.TabIndex = 12;
-            this.labelBlocks.Text = "Блоки";
-            // 
             // unsetSearch
             // 
             this.unsetSearch.BackColor = System.Drawing.Color.White;
@@ -462,6 +501,17 @@
             this.btnSearch.TabStop = false;
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // lblExportImport
+            // 
+            this.lblExportImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblExportImport.AutoSize = true;
+            this.lblExportImport.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblExportImport.Location = new System.Drawing.Point(1023, 9);
+            this.lblExportImport.Name = "lblExportImport";
+            this.lblExportImport.Size = new System.Drawing.Size(128, 19);
+            this.lblExportImport.TabIndex = 35;
+            this.lblExportImport.Text = "Зберегти/відкрити";
             // 
             // panelCanvas
             // 
@@ -575,7 +625,7 @@
             this.panelBlockStyleEdit.Controls.Add(this.lblBlockFont);
             this.panelBlockStyleEdit.Controls.Add(this.nudBlockBorderWidth);
             this.panelBlockStyleEdit.Controls.Add(this.lblBlockBorderWidth);
-            this.panelBlockStyleEdit.Controls.Add(this.blbBlockBorderColor);
+            this.panelBlockStyleEdit.Controls.Add(this.lblBlockBorderColor);
             this.panelBlockStyleEdit.Controls.Add(this.btnBlockBorderColor);
             this.panelBlockStyleEdit.Controls.Add(this.lblBlockColor);
             this.panelBlockStyleEdit.Controls.Add(this.btnBLockColor);
@@ -666,15 +716,15 @@
             this.lblBlockBorderWidth.TabIndex = 30;
             this.lblBlockBorderWidth.Text = "Товщина обведення";
             // 
-            // blbBlockBorderColor
+            // lblBlockBorderColor
             // 
-            this.blbBlockBorderColor.AutoSize = true;
-            this.blbBlockBorderColor.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.blbBlockBorderColor.Location = new System.Drawing.Point(216, 74);
-            this.blbBlockBorderColor.Name = "blbBlockBorderColor";
-            this.blbBlockBorderColor.Size = new System.Drawing.Size(117, 19);
-            this.blbBlockBorderColor.TabIndex = 29;
-            this.blbBlockBorderColor.Text = "Колір обведення";
+            this.lblBlockBorderColor.AutoSize = true;
+            this.lblBlockBorderColor.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblBlockBorderColor.Location = new System.Drawing.Point(216, 74);
+            this.lblBlockBorderColor.Name = "lblBlockBorderColor";
+            this.lblBlockBorderColor.Size = new System.Drawing.Size(117, 19);
+            this.lblBlockBorderColor.TabIndex = 29;
+            this.lblBlockBorderColor.Text = "Колір обведення";
             // 
             // btnBlockBorderColor
             // 
@@ -730,7 +780,7 @@
             0});
             this.nudBlockWidth.Location = new System.Drawing.Point(341, 10);
             this.nudBlockWidth.Maximum = new decimal(new int[] {
-            1000,
+            100000,
             0,
             0,
             0});
@@ -758,7 +808,7 @@
             0});
             this.nudBlockHeight.Location = new System.Drawing.Point(341, 37);
             this.nudBlockHeight.Maximum = new decimal(new int[] {
-            1000,
+            100000,
             0,
             0,
             0});
@@ -897,6 +947,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1233, 801);
+            this.Controls.Add(this.lblExportImport);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.unsetSearch);
             this.Controls.Add(this.btnSearch);
@@ -973,7 +1026,7 @@
         private System.Windows.Forms.NumericUpDown nudBlockY;
         private System.Windows.Forms.Button btnBLockColor;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.Label blbBlockBorderColor;
+        private System.Windows.Forms.Label lblBlockBorderColor;
         private System.Windows.Forms.Button btnBlockBorderColor;
         private System.Windows.Forms.Label lblBlockColor;
         private System.Windows.Forms.NumericUpDown nudBlockBorderWidth;
@@ -989,6 +1042,9 @@
         private System.Windows.Forms.Label lblArrowColor;
         private System.Windows.Forms.Button btnArrowColor;
         private System.Windows.Forms.Button btnApplyArrowStyle;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Label lblExportImport;
     }
 }
 

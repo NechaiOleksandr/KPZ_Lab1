@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using BlockDiagramEditor.Models;
 using BlockDiagramEditor.Services;
+using Newtonsoft.Json;
+using System.IO;
+using System.Collections.Generic;
+using BlockDiagramEditor.Models.Arrows;
 
 namespace BlockDiagramEditor.WF
 {
@@ -71,6 +74,37 @@ namespace BlockDiagramEditor.WF
                 panelBlockStyleEdit.Visible = BlockManager.SelectedBlock != null;
                 if (BlockManager.SelectedBlock != null)
                 {
+                    if (BlockManager.SelectedBlock.Type != "TextBlock")
+                    {
+                        nudBlockWidth.Minimum = 30;
+                        nudBlockHeight.Minimum = 30;
+                        lblBlockWidth.Visible = true;
+                        lblBlockHeight.Visible = true;
+                        nudBlockWidth.Visible = true;
+                        nudBlockHeight.Visible = true;
+                        lblBlockColor.Visible = true;
+                        btnBLockColor.Visible = true;
+                        lblBlockBorderColor.Visible = true;
+                        btnBlockBorderColor.Visible = true;
+                        lblBlockBorderWidth.Visible = true;
+                        nudBlockBorderWidth.Visible = true;
+                    }
+                    else
+                    {
+                        nudBlockWidth.Minimum = 0;
+                        nudBlockHeight.Minimum = 0;
+                        lblBlockWidth.Visible = false;
+                        lblBlockHeight.Visible = false;
+                        nudBlockWidth.Visible = false;
+                        nudBlockHeight.Visible = false;
+                        lblBlockColor.Visible = false;
+                        btnBLockColor.Visible = false;
+                        lblBlockBorderColor.Visible = false;
+                        btnBlockBorderColor.Visible = false;
+                        lblBlockBorderWidth.Visible = false;
+                        nudBlockBorderWidth.Visible = false;
+                    }
+
                     ActiveControl = null;
                     nudBlockX.Value = (int)BlockManager.SelectedBlock.X;
                     nudBlockY.Value = (int)BlockManager.SelectedBlock.Y;
@@ -151,6 +185,9 @@ namespace BlockDiagramEditor.WF
                 }
             }
 
+            if (BlockManager.Blocks.Count > 0 && ArrowManager.SelectedArrow != null)
+                ArrowManager.Connect(BlockManager.Blocks, currentArrowResizeHandle);
+
             if (e.Button == MouseButtons.Left && selectedModel == 0)
             {
                 if (BlockManager.SelectedBlock == null)
@@ -194,12 +231,6 @@ namespace BlockDiagramEditor.WF
                     ArrowManager.Connect(BlockManager.Blocks, currentArrowResizeHandle);
             }
 
-            if (isPanning)
-            {
-                tr.CanvasOffset = new PointF(tr.CanvasOffset.X + e.X - lastMousePosition.X, tr.CanvasOffset.Y + e.Y - lastMousePosition.Y);
-                lastMousePosition = e.Location;
-            }
-
             if (isResizing && (BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null))
             {
                 if (ArrowManager.SelectedArrow != null && currentArrowResizeHandle != -1)
@@ -214,6 +245,12 @@ namespace BlockDiagramEditor.WF
                     BlockManager.ResizeSelectedBlock(currentBlockResizeHandle, tr.STCX(e.X), tr.STCY(e.Y));
                     ArrowManager.ResizeArrowsByBracing();
                 }
+            }
+
+            if (isPanning)
+            {
+                tr.CanvasOffset = new PointF(tr.CanvasOffset.X + e.X - lastMousePosition.X, tr.CanvasOffset.Y + e.Y - lastMousePosition.Y);
+                lastMousePosition = e.Location;
             }
 
             if (e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) 
@@ -232,6 +269,8 @@ namespace BlockDiagramEditor.WF
                 if (ArrowManager.SelectedArrow.RebuildArrow() == true) 
                     ArrowManager.Arrows.Remove(ArrowManager.SelectedArrow);
             ArrowManager.ResizeArrowsByBracing();
+            
+            panelCanvas.Invalidate();
         }
 
         private void panelCanvas_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -432,5 +471,57 @@ namespace BlockDiagramEditor.WF
             btnArrowColor.FlatAppearance.MouseDownBackColor = btnArrowColor.BackColor;
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ActiveControl = null;
+            var blockDTOs = BlockManager.Blocks.Select(b => new BlockDTO(b)).ToList();
+            var arrowDTOs = ArrowManager.Arrows.Select(a => new ArrowDTO(a)).ToList();
+            var data = new { Blocks = blockDTOs, Arrows = arrowDTOs };
+
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON файли (*.json)|*.json";
+            saveFileDialog.Title = "Зберегти діаграму";
+            saveFileDialog.FileName = "diagram.json";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog.FileName, json);
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            ActiveControl = null;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON файли (*.json)|*.json";
+            openFileDialog.Title = "Відкрити діаграму";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string json = File.ReadAllText(openFileDialog.FileName);
+                    var canvasDto = JsonConvert.DeserializeObject<CanvasDTO>(json);
+
+                    if (canvasDto != null && canvasDto.Blocks != null && canvasDto.Arrows != null)
+                    {
+                        var loadedBlocks = canvasDto.Blocks.Select(dto => dto.ToBlock()).ToList();
+                        var loadedArrows = canvasDto.Arrows.Select(dto => dto.ToArrow(loadedBlocks)).ToList();
+                        BlockManager = new BlockManager(tr);
+                        BlockManager.Blocks.AddRange(loadedBlocks);
+                        BlockManager.CurrentId = BlockManager.Blocks.Max(block => block.Id) + 1;
+                        ArrowManager = new ArrowManager(tr);
+                        ArrowManager.Arrows.AddRange(loadedArrows);
+                        panelCanvas.Invalidate();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Під час завантаження файлу сталася помилка: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

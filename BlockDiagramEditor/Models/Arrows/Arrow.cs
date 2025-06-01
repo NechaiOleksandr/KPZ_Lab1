@@ -13,13 +13,29 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace BlockDiagramEditor.Models.Arrows
 {
-    public abstract class Arrow
-    {
-        public string Type => GetType().Name;
-        public List<PointF> Points;
-        public List<(Block Block, int Side)> Bracing;
-        public Pen Pen;
-        public bool IsSelected;
+        public abstract class Arrow
+        {
+            public string Type => GetType().Name;
+            public List<PointF> Points;
+            public List<(Block Block, int Side)> Bracing;
+            public Pen Pen;
+            public bool IsSelected;
+
+            public Arrow()
+            {
+                Points = new List<PointF>
+                {
+                    new PointF(0, 0),
+                    new PointF(0, 0),
+                };
+                Bracing = new List<(Block Block, int Side)>
+                {
+                    (null, 0),
+                    (null, 0),
+                };
+                Pen = new Pen(Color.Black, 2);
+                IsSelected = false;
+            }
 
         public Arrow(float x, float y)
         {
