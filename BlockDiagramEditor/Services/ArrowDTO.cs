@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BlockDiagramEditor.Models;
 using BlockDiagramEditor.Models.Arrows;
-// using static System.Net.Mime.MediaTypeNames; // Цей using, ймовірно, не потрібен
 
 namespace BlockDiagramEditor.Services
 {
@@ -33,11 +32,28 @@ namespace BlockDiagramEditor.Services
             Points = arrow.Points;
             Color = $"#{arrow.Pen.Color.R:X2}{arrow.Pen.Color.G:X2}{arrow.Pen.Color.B:X2}";
             Width = arrow.Pen.Width;
-            Bracing = new List<BracingDTO>
+
+            Bracing = new List<BracingDTO>();
+
+            for (int i = 0; i < 2; i++)
             {
-                new BracingDTO { BlockId = arrow.Bracing[0].Block.Id, Side = arrow.Bracing[0].Side },
-                new BracingDTO { BlockId = arrow.Bracing[1].Block.Id, Side = arrow.Bracing[1].Side }
-            };
+                if (arrow.Bracing != null && i < arrow.Bracing.Count && arrow.Bracing[i].Block != null)
+                {
+                    Bracing.Add(new BracingDTO
+                    {
+                        BlockId = arrow.Bracing[i].Block.Id,
+                        Side = arrow.Bracing[i].Side
+                    });
+                }
+                else
+                {
+                    Bracing.Add(new BracingDTO
+                    {
+                        BlockId = 0,
+                        Side = 0
+                    });
+                }
+            }
         }
 
         public Arrow ToArrow(List<Block> blocks)
@@ -68,24 +84,26 @@ namespace BlockDiagramEditor.Services
             arrow.Points = Points;
             arrow.Pen = new Pen(ColorTranslator.FromHtml(Color), Width);
 
-            var startBlock = blocks.FirstOrDefault(b => b.Id == Bracing[0].BlockId);
-            var endBlock = blocks.FirstOrDefault(b => b.Id == Bracing[1].BlockId);
+            var bracingList = new List<(Block Block, int Side)>();
 
-            if (startBlock == null)
+            foreach (var b in Bracing)
             {
-                throw new InvalidDataException($"Стрілка посилається на неіснуючий блок з Id: {Bracing[0].BlockId}");
+                if (b.BlockId == 0)
+                {
+                    bracingList.Add((null, 0));
+                }
+                else
+                {
+                    var block = blocks.FirstOrDefault(x => x.Id == b.BlockId);
+                    if (block == null)
+                    {
+                        throw new InvalidDataException($"Стрілка посилається на неіснуючий блок з Id: {b.BlockId}");
+                    }
+                    bracingList.Add((block, b.Side));
+                }
             }
-            if (endBlock == null)
-            {
-                throw new InvalidDataException($"Стрілка посилається на неіснуючий блок з Id: {Bracing[1].BlockId}");
-            }
 
-            arrow.Bracing = new List<(Block Block, int Side)>
-            {
-                (startBlock, Bracing[0].Side),
-                (endBlock, Bracing[1].Side),
-            };
-
+            arrow.Bracing = bracingList;
             return arrow;
         }
     }

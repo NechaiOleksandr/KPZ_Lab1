@@ -16,10 +16,10 @@ namespace BlockDiagramEditor.Models.Arrows
         public abstract class Arrow
         {
             public string Type => GetType().Name;
-            public List<PointF> Points;
-            public List<(Block Block, int Side)> Bracing;
-            public Pen Pen;
-            public bool IsSelected;
+            public List<PointF> Points { get; set; }
+            public List<(Block Block, int Side)> Bracing {  get; set; }
+            public Pen Pen {  get; set; }
+            public bool IsSelected {  get; set; }
 
             public Arrow()
             {
@@ -142,7 +142,7 @@ namespace BlockDiagramEditor.Models.Arrows
             RectangleF Handle = new RectangleF();
             for (int i = 0; i < Points.Count; i++)
             {
-                Handle = new RectangleF(tr.CTSX(Points[i].X) - 5, tr.CTSY(Points[i].Y) - 5, 10, 10);
+                Handle = new RectangleF(tr.CTSX(Points[i].X) - 10, tr.CTSY(Points[i].Y) - 10, 20, 20);
 
                 if (Handle.Contains(screenPoint))
                     return i;

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BlockDiagramEditor.WF.Form1" Collapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RIYRAqHKxLBEkMEWCgLSIhtCCAIYhYxhAQRdi7dBM6Y=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockDiagramEditor.WF.Program">
+    <Position X="11.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockDiagramEditor.WF.Properties.Resources" Collapsed="true">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAACAAAAAAAAIAABFAAIAQAgAgAAAgAAACEgAIQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockDiagramEditor.WF.Properties.Settings" Collapsed="true">
+    <Position X="13.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockDiagramEditor.Controls.BufferedPanel" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Arrows.ClassicArrow">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Arrows.EmptyTrArrow">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Arrows.FilledTrArrow">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Arrows.LineArrow">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Arrows.TwoHeadedArrow">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Block">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.DiamondBlock">
+    <Position X="0.5" Y="5" Width="1.75" />
+    <InheritanceLine Type="BlockDiagramEditor.Models.Block" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="5.132" />
+        <Point X="3.75" Y="5.324" />
+        <Point X="2.442" Y="5.324" />
+        <Point X="2.442" Y="5.713" />
+        <Point X="2.25" Y="5.713" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.EllipseBlock">
+    <Position X="0.5" Y="8" Width="1.75" />
+    <InheritanceLine Type="BlockDiagramEditor.Models.Block" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="5.132" />
+        <Point X="3.75" Y="5.324" />
+        <Point X="2.442" Y="5.324" />
+        <Point X="2.442" Y="8.713" />
+        <Point X="2.25" Y="8.713" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.HexagonBlock">
+    <Position X="0.5" Y="6.5" Width="1.75" />
+    <InheritanceLine Type="BlockDiagramEditor.Models.Block" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="5.132" />
+        <Point X="3.75" Y="5.324" />
+        <Point X="2.442" Y="5.324" />
+        <Point X="2.442" Y="7.213" />
+        <Point X="2.25" Y="7.213" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.ParalelogramBlock">
+    <Position X="0.5" Y="2" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.RectangleBlock">
+    <Position X="0.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.TerminatorBlock">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.TextBlock">
+    <Position X="2.75" Y="5.5" Width="1.75" />
+    <InheritanceLine Type="BlockDiagramEditor.Models.Block" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="5.132" />
+        <Point X="3.75" Y="5.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Services.ArrowDTO">
+    <Position X="15.75" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="BlockDiagramEditor.Services.ArrowDTO.BracingDTO" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Services.ArrowManager">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Services.BlockDTO">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Services.BlockManager">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Services.CanvasDTO">
+    <Position X="15.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Services.CoordinateTransformer">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BlockDiagramEditor.Models.Arrows.Arrow">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="BlockDiagramEditor.Models.ResizeHandle" Collapsed="true">
+    <Position X="9.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

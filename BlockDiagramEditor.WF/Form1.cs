@@ -70,69 +70,68 @@ namespace BlockDiagramEditor.WF
                     e.Graphics.DrawLine(Pens.Silver, x, 0, x, panelCanvas.Height);
                 for (float x = tr.CanvasOffset.X + step * tr.Scale; x < panelCanvas.Width; x += step * tr.Scale)
                     e.Graphics.DrawLine(Pens.Silver, x, 0, x, panelCanvas.Height);
-
-                panelBlockStyleEdit.Visible = BlockManager.SelectedBlock != null;
-                if (BlockManager.SelectedBlock != null)
+            }
+            panelBlockStyleEdit.Visible = BlockManager.SelectedBlock != null;
+            if (BlockManager.SelectedBlock != null)
+            {
+                if (BlockManager.SelectedBlock.Type != "TextBlock")
                 {
-                    if (BlockManager.SelectedBlock.Type != "TextBlock")
-                    {
-                        nudBlockWidth.Minimum = 30;
-                        nudBlockHeight.Minimum = 30;
-                        lblBlockWidth.Visible = true;
-                        lblBlockHeight.Visible = true;
-                        nudBlockWidth.Visible = true;
-                        nudBlockHeight.Visible = true;
-                        lblBlockColor.Visible = true;
-                        btnBLockColor.Visible = true;
-                        lblBlockBorderColor.Visible = true;
-                        btnBlockBorderColor.Visible = true;
-                        lblBlockBorderWidth.Visible = true;
-                        nudBlockBorderWidth.Visible = true;
-                    }
-                    else
-                    {
-                        nudBlockWidth.Minimum = 0;
-                        nudBlockHeight.Minimum = 0;
-                        lblBlockWidth.Visible = false;
-                        lblBlockHeight.Visible = false;
-                        nudBlockWidth.Visible = false;
-                        nudBlockHeight.Visible = false;
-                        lblBlockColor.Visible = false;
-                        btnBLockColor.Visible = false;
-                        lblBlockBorderColor.Visible = false;
-                        btnBlockBorderColor.Visible = false;
-                        lblBlockBorderWidth.Visible = false;
-                        nudBlockBorderWidth.Visible = false;
-                    }
-
-                    ActiveControl = null;
-                    nudBlockX.Value = (int)BlockManager.SelectedBlock.X;
-                    nudBlockY.Value = (int)BlockManager.SelectedBlock.Y;
-                    nudBlockWidth.Value = (int)BlockManager.SelectedBlock.Width;
-                    nudBlockHeight.Value = (int)BlockManager.SelectedBlock.Height;
-                    btnBLockColor.BackColor = BlockManager.SelectedBlock.Brush.Color;
-                    btnBLockColor.FlatAppearance.MouseOverBackColor = btnBLockColor.BackColor;
-                    btnBLockColor.FlatAppearance.MouseDownBackColor = btnBLockColor.BackColor;
-                    btnBlockBorderColor.BackColor = BlockManager.SelectedBlock.Border.Color;
-                    btnBlockBorderColor.FlatAppearance.MouseOverBackColor = btnBlockBorderColor.BackColor;
-                    btnBlockBorderColor.FlatAppearance.MouseDownBackColor = btnBlockBorderColor.BackColor;
-                    nudBlockBorderWidth.Value = (int)BlockManager.SelectedBlock.Border.Width;
-                    fontDialog.Font = BlockManager.SelectedBlock.Font;
-                    tbBlockFont.Text = $"{BlockManager.SelectedBlock.Font.FontFamily.Name}, {(int)BlockManager.SelectedBlock.Font.Size}";
-                    btnBlockTextColor.BackColor = BlockManager.SelectedBlock.TextColor.Color;
-                    btnBlockTextColor.FlatAppearance.MouseOverBackColor = btnBlockTextColor.BackColor;
-                    btnBlockTextColor.FlatAppearance.MouseDownBackColor = btnBlockTextColor.BackColor;
+                    nudBlockWidth.Minimum = 30;
+                    nudBlockHeight.Minimum = 30;
+                    lblBlockWidth.Visible = true;
+                    lblBlockHeight.Visible = true;
+                    nudBlockWidth.Visible = true;
+                    nudBlockHeight.Visible = true;
+                    lblBlockColor.Visible = true;
+                    btnBLockColor.Visible = true;
+                    lblBlockBorderColor.Visible = true;
+                    btnBlockBorderColor.Visible = true;
+                    lblBlockBorderWidth.Visible = true;
+                    nudBlockBorderWidth.Visible = true;
+                }
+                else
+                {
+                    nudBlockWidth.Minimum = 0;
+                    nudBlockHeight.Minimum = 0;
+                    lblBlockWidth.Visible = false;
+                    lblBlockHeight.Visible = false;
+                    nudBlockWidth.Visible = false;
+                    nudBlockHeight.Visible = false;
+                    lblBlockColor.Visible = false;
+                    btnBLockColor.Visible = false;
+                    lblBlockBorderColor.Visible = false;
+                    btnBlockBorderColor.Visible = false;
+                    lblBlockBorderWidth.Visible = false;
+                    nudBlockBorderWidth.Visible = false;
                 }
 
-                panelArrowStyleEdit.Visible = ArrowManager.SelectedArrow != null;
-                if (ArrowManager.SelectedArrow != null)
-                {
-                    ActiveControl = null;
-                    btnArrowColor.BackColor = ArrowManager.SelectedArrow.Pen.Color;
-                    btnArrowColor.FlatAppearance.MouseOverBackColor = btnArrowColor.BackColor;
-                    btnArrowColor.FlatAppearance.MouseDownBackColor = btnArrowColor.BackColor;
-                    nudArrowWidth.Value = (int)ArrowManager.SelectedArrow.Pen.Width;
-                }
+                ActiveControl = null;
+                nudBlockX.Value = (int)BlockManager.SelectedBlock.X;
+                nudBlockY.Value = (int)BlockManager.SelectedBlock.Y;
+                nudBlockWidth.Value = (int)BlockManager.SelectedBlock.Width;
+                nudBlockHeight.Value = (int)BlockManager.SelectedBlock.Height;
+                btnBLockColor.BackColor = BlockManager.SelectedBlock.Brush.Color;
+                btnBLockColor.FlatAppearance.MouseOverBackColor = btnBLockColor.BackColor;
+                btnBLockColor.FlatAppearance.MouseDownBackColor = btnBLockColor.BackColor;
+                btnBlockBorderColor.BackColor = BlockManager.SelectedBlock.Border.Color;
+                btnBlockBorderColor.FlatAppearance.MouseOverBackColor = btnBlockBorderColor.BackColor;
+                btnBlockBorderColor.FlatAppearance.MouseDownBackColor = btnBlockBorderColor.BackColor;
+                nudBlockBorderWidth.Value = (int)BlockManager.SelectedBlock.Border.Width;
+                fontDialog.Font = BlockManager.SelectedBlock.Font;
+                tbBlockFont.Text = $"{BlockManager.SelectedBlock.Font.FontFamily.Name}, {Math.Round(BlockManager.SelectedBlock.Font.Size)}";
+                btnBlockTextColor.BackColor = BlockManager.SelectedBlock.TextColor.Color;
+                btnBlockTextColor.FlatAppearance.MouseOverBackColor = btnBlockTextColor.BackColor;
+                btnBlockTextColor.FlatAppearance.MouseDownBackColor = btnBlockTextColor.BackColor;
+            }
+
+            panelArrowStyleEdit.Visible = ArrowManager.SelectedArrow != null;
+            if (ArrowManager.SelectedArrow != null)
+            {
+                ActiveControl = null;
+                btnArrowColor.BackColor = ArrowManager.SelectedArrow.Pen.Color;
+                btnArrowColor.FlatAppearance.MouseOverBackColor = btnArrowColor.BackColor;
+                btnArrowColor.FlatAppearance.MouseDownBackColor = btnArrowColor.BackColor;
+                nudArrowWidth.Value = (int)ArrowManager.SelectedArrow.Pen.Width;
             }
 
             if (BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null)
@@ -398,18 +397,21 @@ namespace BlockDiagramEditor.WF
             ActiveControl = null;
         }
 
-        private void btnBlockStyleApply_Click(object sender, EventArgs e)
+        private void btnApplyBlockStyle_Click(object sender, EventArgs e)
         {
             ActiveControl = null;
-            BlockManager.SelectedBlock.X = (float)nudBlockX.Value;
-            BlockManager.SelectedBlock.Y = (float)nudBlockY.Value;
-            BlockManager.SelectedBlock.Width = (float)nudBlockWidth.Value;
-            BlockManager.SelectedBlock.Height = (float)nudBlockHeight.Value;
+            BlockManager.EndEditingText(panelCanvas);
+            BlockManager.SelectedBlock.X = (float)(nudBlockX.Value - nudBlockX.Value % 10);
+            BlockManager.SelectedBlock.Y = (float)(nudBlockY.Value - nudBlockY.Value % 10);
+            BlockManager.SelectedBlock.Width = (float)(nudBlockWidth.Value - nudBlockWidth.Value % 10);
+            BlockManager.SelectedBlock.Height = (float)(nudBlockHeight.Value - nudBlockHeight.Value % 10);
             BlockManager.SelectedBlock.Brush.Color = btnBLockColor.BackColor;
             BlockManager.SelectedBlock.Border.Color = btnBlockBorderColor.BackColor;
             BlockManager.SelectedBlock.Border.Width = (float)nudBlockBorderWidth.Value;
             BlockManager.SelectedBlock.Font = fontDialog.Font;
             BlockManager.SelectedBlock.TextColor.Color = btnBlockTextColor.BackColor;
+            if (BlockManager.SelectedBlock is TextBlock textBlock)
+                textBlock.ResizeByText();
 
             panelCanvas.Invalidate();
         }
@@ -458,7 +460,7 @@ namespace BlockDiagramEditor.WF
             ActiveControl = null;
             fontDialog.Font = BlockManager.SelectedBlock.Font;
             fontDialog.ShowDialog();
-            tbBlockFont.Text = $"{fontDialog.Font.FontFamily.Name}, {(int)fontDialog.Font.Size}";
+            tbBlockFont.Text = $"{fontDialog.Font.FontFamily.Name}, {Math.Round(fontDialog.Font.Size)}";
         }
 
         private void btnArrowColor_Click(object sender, EventArgs e)

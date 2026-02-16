@@ -71,7 +71,6 @@
     <Compile Include="Services\BlockManager.cs" />
     <Compile Include="Services\CanvasDTO.cs" />
     <Compile Include="Services\CoordinateTransformer.cs" />
-    <Compile Include="Services\Serialazer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
