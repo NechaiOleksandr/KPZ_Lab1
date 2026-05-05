@@ -13,6 +13,7 @@ namespace BlockDiagramEditor.Services
 {
     public class ArrowManager
     {
+        private const int GridStep = 5;
         public List<Arrow> Arrows { get; private set; }
         public Arrow SelectedArrow { get; set; }
         public Arrow LastSelectedArrow { get; set; }
@@ -52,8 +53,8 @@ namespace BlockDiagramEditor.Services
             if (SelectedArrow != null)
             {
                 PointF oldStart = SelectedArrow.Points[0];
-                float dx = ((x - offset.X) - ((x - offset.X) % 5)) - oldStart.X;
-                float dy = ((y - offset.Y) - ((y - offset.Y) % 5)) - oldStart.Y;
+                float dx = ((x - offset.X) - ((x - offset.X) % GridStep)) - oldStart.X;
+                float dy = ((y - offset.Y) - ((y - offset.Y) % GridStep)) - oldStart.Y;
 
                 for (int i = 0; i < SelectedArrow.Points.Count; i++)
                 {
@@ -65,8 +66,8 @@ namespace BlockDiagramEditor.Services
 
         public void AddArrow(ElementType type, int x, int y)
         {
-            float X = (Tr.STCX(x) - 50) - (Tr.STCX(x) - 50) % 5;
-            float Y = (Tr.STCY(y) - 50) - (Tr.STCY(y) - 50) % 5;
+            float X = (Tr.STCX(x) - 50) - (Tr.STCX(x) - 50) % GridStep;
+            float Y = (Tr.STCY(y) - 50) - (Tr.STCY(y) - 50) % GridStep;
 
             Arrow newArrow = null;
 
@@ -97,12 +98,12 @@ namespace BlockDiagramEditor.Services
 
         public void ResizeSelectedArrow(int handle, float canvasX, float canvasY)
         {
-            SelectedArrow.Points[handle] = new PointF(canvasX - canvasX % 5, canvasY - canvasY % 5);
+            SelectedArrow.Points[handle] = new PointF(canvasX - canvasX % GridStep, canvasY - canvasY % GridStep);
         }
 
         public void AddPointToSelectedArrow(int handle, float canvasX, float canvasY)
         {
-            SelectedArrow.Points.Insert(handle + 1, new PointF(canvasX - canvasX % 5, canvasY - canvasY % 5));
+            SelectedArrow.Points.Insert(handle + 1, new PointF(canvasX - canvasX % GridStep, canvasY - canvasY % GridStep));
         }
 
         public void Connect(List<Block> blocks, int handle)

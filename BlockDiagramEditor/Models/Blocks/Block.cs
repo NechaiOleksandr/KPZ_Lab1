@@ -12,6 +12,8 @@ namespace BlockDiagramEditor.Models
 {
     public abstract class Block
     {
+        public const float DefaultWidth = 160f;
+        public const float DefaultHeight = 80f;
         public string Type => GetType().Name;
         public float X { get; set; }
         public float Y { get; set; }
@@ -31,8 +33,8 @@ namespace BlockDiagramEditor.Models
         {
             X = 0;
             Y = 0;
-            Width = 160;
-            Height = 80;
+            Width = DefaultWidth;
+            Height = DefaultHeight;
             Text = string.Empty;
             Font = new Font("Microsoft YaHei UI", 12);
             Border = new Pen(Color.Black, 2);
@@ -46,8 +48,8 @@ namespace BlockDiagramEditor.Models
         {
             X = x;
             Y = y;
-            Width = 160;
-            Height = 80;
+            Width = DefaultWidth;
+            Height = DefaultHeight;
             Text = string.Empty;
             Font = new Font("Microsoft YaHei UI", 12);
             Border = new Pen(Color.Black, 2);
