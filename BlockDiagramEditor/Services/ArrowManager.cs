@@ -63,19 +63,32 @@ namespace BlockDiagramEditor.Services
             }
         }
 
-        public void AddArrow(int model, int x, int y)
+        public void AddArrow(ElementType type, int x, int y)
         {
             float X = (Tr.STCX(x) - 50) - (Tr.STCX(x) - 50) % 5;
             float Y = (Tr.STCY(y) - 50) - (Tr.STCY(y) - 50) % 5;
+
             Arrow newArrow = null;
-            switch (model)
+
+            switch (type)
             {
-                case 1: newArrow = new ClassicArrow(X, Y); break;
-                case 2: newArrow = new EmptyTrArrow(X, Y); break;
-                case 3: newArrow = new FilledTrArrow(X, Y); break;
-                case 4: newArrow = new LineArrow(X, Y); break;
-                    case 5: newArrow = new TwoHeadedArrow(X, Y); break;
+                case ElementType.ArrowClassic:
+                    newArrow = new ClassicArrow(X, Y);
+                    break;
+                case ElementType.ArrowEmptyTr:
+                    newArrow = new EmptyTrArrow(X, Y);
+                    break;
+                case ElementType.ArrowFilledTr:
+                    newArrow = new FilledTrArrow(X, Y);
+                    break;
+                case ElementType.ArrowLine:
+                    newArrow = new LineArrow(X, Y);
+                    break;
+                case ElementType.ArrowTwoHeaded:
+                    newArrow = new TwoHeadedArrow(X, Y);
+                    break;
             }
+
             if (newArrow != null)
             {
                 Arrows.Add(newArrow);

@@ -42,29 +42,44 @@ namespace BlockDiagramEditor.Services
             }
         }
 
-        public void AddBlock(int model, int x, int y)
+        public void AddBlock(ElementType type, int x, int y)
         {
             float X = (Tr.STCX(x) - 80) - (Tr.STCX(x) - 80) % 10;
             float Y = (Tr.STCY(y) - 40) - (Tr.STCY(y) - 40) % 10;
+
             Block newBlock = null;
-            switch (model)
+
+            switch (type)
             {
-                case 1: newBlock = new TerminatorBlock(X, Y, CurrentId); break;
-                case 2: newBlock = new ParalelogramBlock(X, Y, CurrentId); break;
-                case 3: newBlock = new RectangleBlock(X, Y, CurrentId); break;
-                case 4: newBlock = new DiamondBlock(X, Y, CurrentId); break;
-                case 5: newBlock = new HexagonBlock(X, Y, CurrentId); break;
-                case 6: newBlock = new EllipseBlock(X, Y, CurrentId); break;
-                case 7:
+                case ElementType.BlockTerminator:
+                    newBlock = new TerminatorBlock(X, Y, CurrentId);
+                    break;
+                case ElementType.BlockParalelogram:
+                    newBlock = new ParalelogramBlock(X, Y, CurrentId);
+                    break;
+                case ElementType.BlockRectangle:
+                    newBlock = new RectangleBlock(X, Y, CurrentId);
+                    break;
+                case ElementType.BlockDiamond:
+                    newBlock = new DiamondBlock(X, Y, CurrentId);
+                    break;
+                case ElementType.BlockHexagon:
+                    newBlock = new HexagonBlock(X, Y, CurrentId);
+                    break;
+                case ElementType.BlockEllipse:
+                    newBlock = new EllipseBlock(X, Y, CurrentId);
+                    break;
+                case ElementType.BlockText:
                     X = (Tr.STCX(x) - 10) - (Tr.STCX(x) - 10) % 10;
                     Y = (Tr.STCY(y) - 10) - (Tr.STCY(y) - 10) % 10;
-                    newBlock = new TextBlock(X, Y, CurrentId); 
+                    newBlock = new TextBlock(X, Y, CurrentId);
                     break;
             }
-            CurrentId++;
+
             if (newBlock != null)
             {
                 Blocks.Add(newBlock);
+                CurrentId++;
             }
         }
 
