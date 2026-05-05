@@ -12,8 +12,8 @@ using BlockDiagramEditor.Models.Arrows;
 namespace BlockDiagramEditor.WF
 {
     public partial class Form1 : Form
-    {   
-        private int selectedModel = 0;
+    {
+        private ElementType selectedType = ElementType.None;
         private bool isDragging = false;
         private bool isPanning = false;
         private PointF lastMousePosition;
@@ -175,7 +175,7 @@ namespace BlockDiagramEditor.WF
             if (BlockManager.Blocks.Count > 0 && ArrowManager.SelectedArrow != null)
                 ArrowManager.Connect(BlockManager.Blocks, currentArrowResizeHandle);
 
-            if (e.Button == MouseButtons.Left && selectedModel == 0)
+            if (e.Button == MouseButtons.Left && selectedType == ElementType.None)
             {
                 if (BlockManager.SelectedBlock == null)
                 ArrowManager.SelectArrow(e.X, e.Y);
@@ -183,16 +183,23 @@ namespace BlockDiagramEditor.WF
                 BlockManager.SelectBlock(e.X, e.Y);
             }
 
-            if (selectedModel != 0)
+            if (selectedType != ElementType.None)
             {
-                if (selectedModel <= 7)
-                    BlockManager.AddBlock(selectedModel, e.X, e.Y);
-                else
-                    ArrowManager.AddArrow(selectedModel - 7, e.X, e.Y);
-                selectedModel = 0;
+                string typeName = selectedType.ToString();
+
+                if (typeName.StartsWith("Block"))
+                {
+                    BlockManager.AddBlock(selectedType, e.X, e.Y);
+                }
+                else if (typeName.StartsWith("Arrow"))
+                {
+                    ArrowManager.AddArrow(selectedType, e.X, e.Y);
+                }
+
+                selectedType = ElementType.None;
             }
 
-            if ((BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null) && selectedModel == 0 && e.Button == MouseButtons.Left)
+            if ((BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null) && selectedType == ElementType.None && e.Button == MouseButtons.Left)
             {
                 isDragging = true;
                 if (ArrowManager.SelectedArrow != null)
@@ -272,73 +279,73 @@ namespace BlockDiagramEditor.WF
 
         private void btnSelectTerminator_Click(object sender, EventArgs e)
         {
-            selectedModel = 1;
+            selectedType = ElementType.BlockTerminator;
             ActiveControl = null;
         }
 
         private void btnSelectParalelogram_Click(object sender, EventArgs e)
         {
-            selectedModel = 2;
+            selectedType = ElementType.BlockParalelogram;
             ActiveControl = null;
         }
 
         private void btnSelectRectangle_Click(object sender, EventArgs e)
         {
-            selectedModel = 3;
+            selectedType = ElementType.BlockRectangle;
             ActiveControl = null;
         }
 
         private void btnSelectDiamond_Click(object sender, EventArgs e)
         {
-            selectedModel = 4;
+            selectedType = ElementType.BlockDiamond;
             ActiveControl = null;
         }
 
         private void btnSelectHexagon_Click(object sender, EventArgs e)
         {
-            selectedModel = 5;
+            selectedType = ElementType.BlockHexagon;
             ActiveControl = null;
         }
 
         private void btnSelectEllipse_Click(object sender, EventArgs e)
         {
-            selectedModel = 6;
+            selectedType = ElementType.BlockEllipse;
             ActiveControl = null;
         }
 
         private void btnSelectText_Click(object sender, EventArgs e)
         {
-            selectedModel = 7;
+            selectedType = ElementType.BlockText;
             ActiveControl = null;
         }
 
         private void btnSelectClasicArrow_Click(object sender, EventArgs e)
         {
-            selectedModel = 8;
+            selectedType = ElementType.ArrowClassic;
             ActiveControl = null;
         }
 
         private void btnSelectEmptyTrArrow_Click(object sender, EventArgs e)
         {
-            selectedModel = 9;
+            selectedType = ElementType.ArrowEmptyTr;
             ActiveControl = null;
         }
 
         private void btnSelectFilledTrArrow_Click(object sender, EventArgs e)
         {
-            selectedModel = 10;
+            selectedType = ElementType.ArrowFilledTr;
             ActiveControl = null;
         }
 
         private void btnSelectLineArrow_Click(object sender, EventArgs e)
         {
-            selectedModel = 11;
+            selectedType = ElementType.ArrowLine;
             ActiveControl = null;
         }
 
         private void btnSelectTwoHeadedArrow_Click(object sender, EventArgs e)
         {
-            selectedModel = 12;
+            selectedType = ElementType.ArrowTwoHeaded;
             ActiveControl = null;
         }
 
