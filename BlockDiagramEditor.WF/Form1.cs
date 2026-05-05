@@ -50,107 +50,95 @@ namespace BlockDiagramEditor.WF
 
         private void panelCanvas_Paint(object sender, PaintEventArgs e)
         {
-            if (showGrid.Checked)
-            {
-                e.Graphics.DrawLine(centerLine, tr.CanvasOffset.X % 8 - 5, tr.CanvasOffset.Y, panelCanvas.Width, tr.CanvasOffset.Y);
-                e.Graphics.DrawLine(centerLine, tr.CanvasOffset.X, tr.CanvasOffset.Y % 8 - 5, tr.CanvasOffset.X, panelCanvas.Height);
-
-                int step;
-                if (tr.Scale == 5) step = 5;
-                else if (tr.Scale >= 2.5) step = 10;
-                else if (tr.Scale >= 1) step = 20;
-                else if (tr.Scale >= 0.5) step = 40;
-                else step = 80;
-
-                for (float y = tr.CanvasOffset.Y - step * tr.Scale; y >= 0; y -= step * tr.Scale)
-                    e.Graphics.DrawLine(Pens.Silver, 0, y, panelCanvas.Width, y);
-                for (float y = tr.CanvasOffset.Y + step * tr.Scale; y < panelCanvas.Height; y += step * tr.Scale)
-                    e.Graphics.DrawLine(Pens.Silver, 0, y, panelCanvas.Width, y);
-                for (float x = tr.CanvasOffset.X - step * tr.Scale; x >= 0; x -= step * tr.Scale)
-                    e.Graphics.DrawLine(Pens.Silver, x, 0, x, panelCanvas.Height);
-                for (float x = tr.CanvasOffset.X + step * tr.Scale; x < panelCanvas.Width; x += step * tr.Scale)
-                    e.Graphics.DrawLine(Pens.Silver, x, 0, x, panelCanvas.Height);
-            }
-            panelBlockStyleEdit.Visible = BlockManager.SelectedBlock != null;
-            if (BlockManager.SelectedBlock != null)
-            {
-                if (BlockManager.SelectedBlock.Type != "TextBlock")
-                {
-                    nudBlockWidth.Minimum = 30;
-                    nudBlockHeight.Minimum = 30;
-                    lblBlockWidth.Visible = true;
-                    lblBlockHeight.Visible = true;
-                    nudBlockWidth.Visible = true;
-                    nudBlockHeight.Visible = true;
-                    lblBlockColor.Visible = true;
-                    btnBLockColor.Visible = true;
-                    lblBlockBorderColor.Visible = true;
-                    btnBlockBorderColor.Visible = true;
-                    lblBlockBorderWidth.Visible = true;
-                    nudBlockBorderWidth.Visible = true;
-                }
-                else
-                {
-                    nudBlockWidth.Minimum = 0;
-                    nudBlockHeight.Minimum = 0;
-                    lblBlockWidth.Visible = false;
-                    lblBlockHeight.Visible = false;
-                    nudBlockWidth.Visible = false;
-                    nudBlockHeight.Visible = false;
-                    lblBlockColor.Visible = false;
-                    btnBLockColor.Visible = false;
-                    lblBlockBorderColor.Visible = false;
-                    btnBlockBorderColor.Visible = false;
-                    lblBlockBorderWidth.Visible = false;
-                    nudBlockBorderWidth.Visible = false;
-                }
-
-                ActiveControl = null;
-                nudBlockX.Value = (int)BlockManager.SelectedBlock.X;
-                nudBlockY.Value = (int)BlockManager.SelectedBlock.Y;
-                nudBlockWidth.Value = (int)BlockManager.SelectedBlock.Width;
-                nudBlockHeight.Value = (int)BlockManager.SelectedBlock.Height;
-                btnBLockColor.BackColor = BlockManager.SelectedBlock.Brush.Color;
-                btnBLockColor.FlatAppearance.MouseOverBackColor = btnBLockColor.BackColor;
-                btnBLockColor.FlatAppearance.MouseDownBackColor = btnBLockColor.BackColor;
-                btnBlockBorderColor.BackColor = BlockManager.SelectedBlock.Border.Color;
-                btnBlockBorderColor.FlatAppearance.MouseOverBackColor = btnBlockBorderColor.BackColor;
-                btnBlockBorderColor.FlatAppearance.MouseDownBackColor = btnBlockBorderColor.BackColor;
-                nudBlockBorderWidth.Value = (int)BlockManager.SelectedBlock.Border.Width;
-                fontDialog.Font = BlockManager.SelectedBlock.Font;
-                tbBlockFont.Text = $"{BlockManager.SelectedBlock.Font.FontFamily.Name}, {Math.Round(BlockManager.SelectedBlock.Font.Size)}";
-                btnBlockTextColor.BackColor = BlockManager.SelectedBlock.TextColor.Color;
-                btnBlockTextColor.FlatAppearance.MouseOverBackColor = btnBlockTextColor.BackColor;
-                btnBlockTextColor.FlatAppearance.MouseDownBackColor = btnBlockTextColor.BackColor;
-            }
-
-            panelArrowStyleEdit.Visible = ArrowManager.SelectedArrow != null;
-            if (ArrowManager.SelectedArrow != null)
-            {
-                ActiveControl = null;
-                btnArrowColor.BackColor = ArrowManager.SelectedArrow.Pen.Color;
-                btnArrowColor.FlatAppearance.MouseOverBackColor = btnArrowColor.BackColor;
-                btnArrowColor.FlatAppearance.MouseDownBackColor = btnArrowColor.BackColor;
-                nudArrowWidth.Value = (int)ArrowManager.SelectedArrow.Pen.Width;
-            }
-
-            if (BlockManager.SelectedBlock != null || ArrowManager.SelectedArrow != null)
-            {
-                btnDelete.Enabled = true;
-                btnDelete.ForeColor = Color.Black;
-            }
-            else
-            {
-                btnDelete.Enabled = false;
-                btnDelete.ForeColor = Color.Gainsboro;
-                btnDelete.FlatAppearance.BorderColor = Color.Black;
-            }
+            DrawGrid(e.Graphics);
 
             foreach (var block in BlockManager.Blocks) block.Draw(e, tr);
             foreach (var arrow in ArrowManager.Arrows) arrow.Draw(e, tr);
 
             if (ArrowManager.Arrows.Count > 0 && ArrowManager.Arrows[0].Bracing[0].Block != null) 
             labelBlocks.Text = ArrowManager.Arrows[0].Bracing[0].Block.IsSelected.ToString();
+        }
+
+        private void DrawGrid(Graphics g)
+        {
+            if (!showGrid.Checked) return;
+
+            g.DrawLine(centerLine, tr.CanvasOffset.X % 8 - 5, tr.CanvasOffset.Y, panelCanvas.Width, tr.CanvasOffset.Y);
+            g.DrawLine(centerLine, tr.CanvasOffset.X, tr.CanvasOffset.Y % 8 - 5, tr.CanvasOffset.X, panelCanvas.Height);
+
+            int step;
+            float currentScale = tr.Scale;
+
+            if (currentScale >= 5f)
+            {
+                step = 5;
+            }
+            else if (currentScale >= 2.5f)
+            {
+                step = 10;
+            }
+            else if (currentScale >= 1f)
+            {
+                step = 20;
+            }
+            else if (currentScale >= 0.5f)
+            {
+                step = 40;
+            }
+            else
+            {
+                step = 80;
+            }
+
+            for (float y = tr.CanvasOffset.Y - step * tr.Scale; y >= 0; y -= step * tr.Scale)
+                g.DrawLine(Pens.Silver, 0, y, panelCanvas.Width, y);
+            for (float y = tr.CanvasOffset.Y + step * tr.Scale; y < panelCanvas.Height; y += step * tr.Scale)
+                g.DrawLine(Pens.Silver, 0, y, panelCanvas.Width, y);
+            for (float x = tr.CanvasOffset.X - step * tr.Scale; x >= 0; x -= step * tr.Scale)
+                g.DrawLine(Pens.Silver, x, 0, x, panelCanvas.Height);
+            for (float x = tr.CanvasOffset.X + step * tr.Scale; x < panelCanvas.Width; x += step * tr.Scale)
+                g.DrawLine(Pens.Silver, x, 0, x, panelCanvas.Height);
+        }
+
+        private void UpdatePropertiesPanel()
+        {
+            var selectedBlock = BlockManager.SelectedBlock;
+            var selectedArrow = ArrowManager.SelectedArrow;
+
+            panelBlockStyleEdit.Visible = selectedBlock != null;
+            if (selectedBlock != null)
+            {
+                bool isNotText = selectedBlock.Type != "TextBlock";
+                nudBlockWidth.Minimum = isNotText ? 30 : 0;
+                nudBlockHeight.Minimum = isNotText ? 30 : 0;
+
+                lblBlockWidth.Visible = lblBlockHeight.Visible = nudBlockWidth.Visible =
+                nudBlockHeight.Visible = lblBlockColor.Visible = btnBLockColor.Visible =
+                lblBlockBorderColor.Visible = btnBlockBorderColor.Visible =
+                lblBlockBorderWidth.Visible = nudBlockBorderWidth.Visible = isNotText;
+
+                nudBlockX.Value = (int)selectedBlock.X;
+                nudBlockY.Value = (int)selectedBlock.Y;
+                nudBlockWidth.Value = (int)selectedBlock.Width;
+                nudBlockHeight.Value = (int)selectedBlock.Height;
+
+                btnBLockColor.BackColor = selectedBlock.Brush.Color;
+                btnBlockBorderColor.BackColor = selectedBlock.Border.Color;
+                nudBlockBorderWidth.Value = (int)selectedBlock.Border.Width;
+                tbBlockFont.Text = $"{selectedBlock.Font.FontFamily.Name}, {Math.Round(selectedBlock.Font.Size)}";
+                btnBlockTextColor.BackColor = selectedBlock.TextColor.Color;
+            }
+
+            panelArrowStyleEdit.Visible = selectedArrow != null;
+            if (selectedArrow != null)
+            {
+                btnArrowColor.BackColor = selectedArrow.Pen.Color;
+                nudArrowWidth.Value = (int)selectedArrow.Pen.Width;
+            }
+
+            bool hasSelection = selectedBlock != null || selectedArrow != null;
+            btnDelete.Enabled = hasSelection;
+            btnDelete.ForeColor = hasSelection ? Color.Black : Color.Gainsboro;
         }
 
         private void panelCanvas_MouseDown(object sender, MouseEventArgs e)
@@ -215,6 +203,8 @@ namespace BlockDiagramEditor.WF
 
             BlockManager.EndEditingText(panelCanvas);
 
+            UpdatePropertiesPanel();
+
             panelCanvas.Invalidate();
         }
 
@@ -268,7 +258,9 @@ namespace BlockDiagramEditor.WF
                 if (ArrowManager.SelectedArrow.RebuildArrow() == true) 
                     ArrowManager.Arrows.Remove(ArrowManager.SelectedArrow);
             ArrowManager.ResizeArrowsByBracing();
-            
+
+            UpdatePropertiesPanel();
+
             panelCanvas.Invalidate();
         }
 
@@ -516,6 +508,7 @@ namespace BlockDiagramEditor.WF
                         BlockManager.CurrentId = BlockManager.Blocks.Max(block => block.Id) + 1;
                         ArrowManager = new ArrowManager(tr);
                         ArrowManager.Arrows.AddRange(loadedArrows);
+                        UpdatePropertiesPanel();
                         panelCanvas.Invalidate();
                     }
                 }
